@@ -33,16 +33,20 @@ Modifier `collector/sources.json` :
 - `type: "html"` + `urls` + `pattern` : une page de résultats publique ; `pattern` est la forme des liens vers les annonces (expression régulière). Si une page ne donne rien, le journal affiche des exemples de liens pour aider à régler `pattern`.
 - `enabled: false` coupe une source.
 
-## Facultatif : offres LinkedIn via vos alertes emploi
+## Recommandé : les plateformes qui bloquent les robots, via leurs alertes email
 
-LinkedIn interdit l'aspiration de ses pages. La méthode gratuite et autorisée :
+FindAPhD, jobs.ac.uk, EURAXESS, Academic Positions, LinkedIn, Nature Careers, ScholarshipDb, FindAMasters, Jobbnorge, Varbi, ABG et AcademicTransfer refusent les programmes automatiques, mais envoient gratuitement leurs nouvelles offres par email. Le collecteur lit ces emails chaque nuit : ce sont les plateformes elles-mêmes qui vous transmettent leurs offres, rien n'est contourné.
 
-1. Créez une adresse Gmail dédiée et activez la validation en deux étapes.
-2. Sur LinkedIn, créez des alertes emploi (« PhD sport science », etc.) envoyées à cette adresse.
-3. Dans Gmail : Compte Google → Sécurité → **Mots de passe des applications** → créez-en un.
-4. Sur GitHub : Settings → Secrets and variables → Actions → ajoutez `GMAIL_USER` (l'adresse) et `GMAIL_APP_PASSWORD` (le mot de passe d'application).
+1. Créez une adresse Gmail dédiée (par exemple `boussole.alertes@gmail.com`) et activez la validation en deux étapes.
+2. Avec cette adresse, créez des alertes sur chaque plateforme (gratuit) : FindAPhD (« PhD alerts »), jobs.ac.uk (« Job alerts », catégorie PhDs), EURAXESS (« Job alerts »), Academic Positions, LinkedIn (« Créer une alerte » sur une recherche « PhD »), Nature Careers, ScholarshipDb… Choisissez vos domaines et pays.
+3. Gmail : Compte Google → Sécurité → **Mots de passe des applications** → créez-en un.
+4. GitHub : Settings → Secrets and variables → Actions → **New repository secret** : `GMAIL_USER` (l'adresse) et `GMAIL_APP_PASSWORD` (le mot de passe d'application).
 
-Le collecteur lira alors chaque nuit les alertes des 3 derniers jours.
+Le collecteur lira alors chaque nuit les alertes des 3 derniers jours et ajoutera les offres au site, avec un lien vers l'annonce d'origine.
+
+## Tester une seule source
+
+Actions → « Mise à jour nocturne et mise en ligne » → Run workflow → champ « Tester seulement ces sources » : identifiants de `sources.json` séparés par des virgules (par exemple `phdfinder,tg-azarapply`). Utile pour régler une source sans resolliciter toutes les autres.
 
 ## Coûts
 
