@@ -273,7 +273,8 @@ def make(src: dict, title: str, url: str, context: str, institution: str = "", d
 
 # ---------------------------------------------------------------- accès poli au web
 session = requests.Session()
-session.headers.update({"User-Agent": UA, "Accept-Language": "en,fr;q=0.8"})
+session.headers.update({"User-Agent": UA, "Accept-Language": "en,fr;q=0.8",
+                        "Accept": "text/html,application/xhtml+xml,application/xml,application/rss+xml;q=0.9,*/*;q=0.8"})
 _robots: dict[str, urllib.robotparser.RobotFileParser | None] = {}
 
 
@@ -307,10 +308,29 @@ def read_rss(src: dict) -> list[dict]:
         feed = feedparser.parse(get(u))
         for e in feed.entries[:80]:
             summary = BeautifulSoup(e.get("summary", "") or "", "html.parser").get_text(" ")
-            it = make(src, e.get("title", ""), e.get("link", ""), summary)
+            title = e.get("title", "")
+            if src.get("strip_source"):
+                title = re.sub(r"\s+-\s+[^-]{2,60}$", "", title)  # « Titre - Nom du site » (Google Actualités)
+            it = make(src, title, e.get("link", ""), summary)
             if it:
                 out.append(it)
     return out
+
+
+def read_rss_index(src: dict) -> list[dict]:
+    """Page « RSS Feeds » d'une université : on suit seulement les fils dont le nom parle de doctorat."""
+    want = re.compile(src.get("match", r"phd|doctoral|studentship|research degree"), re.I)
+    feeds = []
+    for u in src["urls"]:
+        soup = BeautifulSoup(get(u), "html.parser")
+        for a in soup.find_all("a", href=True):
+            if want.search(a.get_text(" ")) and re.search(r"rss|feed|xml", a["href"], re.I):
+                feeds.append(urljoin(u, a["href"]))
+    feeds = list(dict.fromkeys(feeds))[:4]
+    if not feeds:
+        raise ValueError("aucun fil doctorat trouvé sur la page RSS")
+    print(f"   fils suivis : {feeds}")
+    return read_rss({**src, "urls": feeds})
 
 
 def read_html(src: dict) -> list[dict]:
@@ -391,7 +411,8 @@ def main() -> int:
             continue
         print(f"→ {src['name']}")
         try:
-            items = read_rss(src) if src["type"] == "rss" else read_html(src)
+            reader = {"rss": read_rss, "rss_index": read_rss_index, "html": read_html}[src["type"]]
+            items = reader(src)
             report[src["name"]] = {"ok": True, "offres": len(items)}
             print(f"   {len(items)} offre(s) retenue(s)")
             fresh += items

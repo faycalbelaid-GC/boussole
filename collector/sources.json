@@ -1,36 +1,261 @@
 {
-  "_lisez_moi": "Liste des sources visitées chaque nuit. type=rss : fil RSS/Atom. type=html : page de résultats publique, 'pattern' = forme des liens d'annonces. kind = position (poste) ou scholarship (bourse) ; 'auto' = deviné d'après le texte. country = pays par défaut si l'annonce ne le dit pas. Mettez enabled à false pour couper une source.",
-  "sources": [
-    {"id": "jobsacuk", "name": "jobs.ac.uk", "type": "html", "kind": "position", "country": "Royaume-Uni", "enabled": true,
-     "urls": ["https://www.jobs.ac.uk/search/phds", "https://www.jobs.ac.uk/search/phds?startIndex=26", "https://www.jobs.ac.uk/search/phds?startIndex=51"],
-     "pattern": "/job/[A-Z]{3}\\d+"},
-    {"id": "findaphd", "name": "FindAPhD", "type": "html", "kind": "position", "enabled": true,
-     "urls": ["https://www.findaphd.com/phds/latest/",
-              "https://www.findaphd.com/phds/sport-and-exercise-science/?10M721",
-              "https://www.findaphd.com/phds/?Keywords=fully+funded",
-              "https://www.findaphd.com/phds/non-eu-students/?01w0"],
-     "pattern": "/phds/(project|programme|program)/"},
-    {"id": "academicpositions", "name": "Academic Positions", "type": "html", "kind": "position", "enabled": true,
-     "urls": ["https://academicpositions.com/jobs/position/phd", "https://academicpositions.com/jobs/position/postdoc"],
-     "pattern": "academicpositions\\.com/ad/|^/ad/"},
-    {"id": "euraxess", "name": "EURAXESS", "type": "html", "kind": "position", "enabled": true,
-     "urls": ["https://euraxess.ec.europa.eu/jobs/search?f%5B0%5D=offer_type%3Ajob_offer&f%5B1%5D=job_research_profile%3A446",
-              "https://euraxess.ec.europa.eu/jobs/search?f%5B0%5D=offer_type%3Ajob_offer&f%5B1%5D=job_research_profile%3A446&page=1"],
-     "pattern": "/jobs/\\d+$"},
-    {"id": "nottingham", "name": "University of Nottingham", "type": "rss", "kind": "position", "country": "Royaume-Uni", "institution": "University of Nottingham", "enabled": true,
-     "urls": ["https://jobs.nottingham.ac.uk/RSS/rss.aspx?cat=213"]},
-    {"id": "harperadams", "name": "Harper Adams University", "type": "rss", "kind": "position", "country": "Royaume-Uni", "institution": "Harper Adams University", "enabled": true,
-     "urls": ["https://jobs.harper-adams.ac.uk/rss/rss.aspx?cat=473"]},
-    {"id": "scholars4dev", "name": "Scholars4Dev", "type": "rss", "kind": "scholarship", "enabled": true,
-     "urls": ["https://www.scholars4dev.com/feed/"]},
-    {"id": "opportunitydesk", "name": "Opportunity Desk", "type": "rss", "kind": "auto", "enabled": true,
-     "urls": ["https://opportunitydesk.org/feed/"]},
-    {"id": "opportunitiesforafricans", "name": "Opportunities for Africans", "type": "rss", "kind": "auto", "enabled": true,
-     "urls": ["https://www.opportunitiesforafricans.com/feed/"]},
-    {"id": "jobrxiv", "name": "jobRxiv", "type": "rss", "kind": "position", "enabled": true,
-     "urls": ["https://jobrxiv.org/feed/"]},
-    {"id": "scholarshipdb", "name": "ScholarshipDb", "type": "html", "kind": "auto", "enabled": true,
-     "urls": ["https://scholarshipdb.net/scholarships/Program-PhD", "https://scholarshipdb.net/scholarships/Program-Master"],
-     "pattern": "scholarshipdb\\.net/(scholarships|jobs)-in-|^/(scholarships|jobs)-in-"}
-  ]
+ "_lisez_moi": "Liste des sources visitées chaque nuit. type=rss : fil RSS/Atom. type=html : page de résultats publique, 'pattern' = forme des liens d'annonces. kind = position (poste) ou scholarship (bourse) ; 'auto' = deviné d'après le texte. country = pays par défaut si l'annonce ne le dit pas. Mettez enabled à false pour couper une source.",
+ "sources": [
+  {
+   "id": "jobsacuk",
+   "name": "jobs.ac.uk",
+   "type": "html",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "enabled": true,
+   "urls": [
+    "https://www.jobs.ac.uk/search/?jobTypeFacet%5B%5D=phds",
+    "https://www.jobs.ac.uk/search/?jobTypeFacet%5B%5D=masters"
+   ],
+   "pattern": "/job/[A-Z]{3}\\d+"
+  },
+  {
+   "id": "findaphd",
+   "name": "FindAPhD",
+   "type": "html",
+   "kind": "position",
+   "enabled": false,
+   "urls": [
+    "https://www.findaphd.com/phds/latest/",
+    "https://www.findaphd.com/phds/sport-and-exercise-science/?10M721",
+    "https://www.findaphd.com/phds/?Keywords=fully+funded",
+    "https://www.findaphd.com/phds/non-eu-students/?01w0"
+   ],
+   "pattern": "/phds/(project|programme|program)/",
+   "note": "Refuse les robots de GitHub (protection anti-robots) : laissé coupé."
+  },
+  {
+   "id": "academicpositions",
+   "name": "Academic Positions",
+   "type": "html",
+   "kind": "position",
+   "enabled": false,
+   "urls": [
+    "https://academicpositions.com/jobs/position/phd",
+    "https://academicpositions.com/jobs/position/postdoc"
+   ],
+   "pattern": "academicpositions\\.com/ad/|^/ad/",
+   "note": "Refuse les robots de GitHub (protection anti-robots) : laissé coupé."
+  },
+  {
+   "id": "euraxess",
+   "name": "EURAXESS",
+   "type": "html",
+   "kind": "position",
+   "enabled": false,
+   "urls": [
+    "https://euraxess.ec.europa.eu/jobs/search?f%5B0%5D=offer_type%3Ajob_offer&f%5B1%5D=job_research_profile%3A446",
+    "https://euraxess.ec.europa.eu/jobs/search?f%5B0%5D=offer_type%3Ajob_offer&f%5B1%5D=job_research_profile%3A446&page=1"
+   ],
+   "pattern": "/jobs/\\d+$",
+   "note": "Refuse les robots de GitHub (protection anti-robots) : laissé coupé."
+  },
+  {
+   "id": "nottingham",
+   "name": "University of Nottingham",
+   "type": "rss",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Nottingham",
+   "enabled": true,
+   "urls": [
+    "https://jobs.nottingham.ac.uk/RSS/rss.aspx?cat=213"
+   ]
+  },
+  {
+   "id": "harperadams",
+   "name": "Harper Adams University",
+   "type": "rss",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Harper Adams University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.harper-adams.ac.uk/rss/rss.aspx?cat=473"
+   ]
+  },
+  {
+   "id": "scholars4dev",
+   "name": "Scholars4Dev",
+   "type": "rss",
+   "kind": "scholarship",
+   "enabled": true,
+   "urls": [
+    "https://www.scholars4dev.com/feed/"
+   ]
+  },
+  {
+   "id": "opportunitydesk",
+   "name": "Opportunity Desk",
+   "type": "rss",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://opportunitydesk.org/feed/"
+   ]
+  },
+  {
+   "id": "opportunitiesforafricans",
+   "name": "Opportunities for Africans",
+   "type": "rss",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://www.opportunitiesforafricans.com/feed/"
+   ]
+  },
+  {
+   "id": "jobrxiv",
+   "name": "jobRxiv",
+   "type": "rss",
+   "kind": "position",
+   "enabled": false,
+   "urls": [
+    "https://jobrxiv.org/feed/"
+   ],
+   "note": "Refuse les robots de GitHub (protection anti-robots) : laissé coupé."
+  },
+  {
+   "id": "scholarshipdb",
+   "name": "ScholarshipDb",
+   "type": "html",
+   "kind": "auto",
+   "enabled": false,
+   "urls": [
+    "https://scholarshipdb.net/scholarships/Program-PhD",
+    "https://scholarshipdb.net/scholarships/Program-Master"
+   ],
+   "pattern": "scholarshipdb\\.net/(scholarships|jobs)-in-|^/(scholarships|jobs)-in-",
+   "note": "Refuse les robots de GitHub (protection anti-robots) : laissé coupé."
+  },
+  {
+   "id": "daad",
+   "name": "DAAD",
+   "type": "rss",
+   "kind": "position",
+   "country": "Allemagne",
+   "enabled": true,
+   "urls": [
+    "https://api.daad.de/api/feeds/rss/en/phd.xml"
+   ]
+  },
+  {
+   "id": "ku",
+   "name": "Université de Copenhague",
+   "type": "rss",
+   "kind": "position",
+   "country": "Danemark",
+   "institution": "University of Copenhagen",
+   "enabled": true,
+   "urls": [
+    "https://employment.ku.dk/phd?get_rss=1"
+   ]
+  },
+  {
+   "id": "soton",
+   "name": "University of Southampton",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Southampton",
+   "enabled": true,
+   "urls": [
+    "https://jobs.soton.ac.uk/RSS/"
+   ]
+  },
+  {
+   "id": "staffs",
+   "name": "University of Staffordshire",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Staffordshire",
+   "enabled": true,
+   "urls": [
+    "https://jobs.staffs.ac.uk/RSS/"
+   ]
+  },
+  {
+   "id": "bcu",
+   "name": "Birmingham City University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Birmingham City University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.bcu.ac.uk/RSS/"
+   ]
+  },
+  {
+   "id": "worcester",
+   "name": "University of Worcester",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Worcester",
+   "enabled": true,
+   "urls": [
+    "https://jobs.worcester.ac.uk/RSS/"
+   ]
+  },
+  {
+   "id": "lincoln",
+   "name": "University of Lincoln",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Lincoln",
+   "enabled": true,
+   "urls": [
+    "https://jobs.lincoln.ac.uk/RSS/"
+   ]
+  },
+  {
+   "id": "cambridge",
+   "name": "University of Cambridge",
+   "type": "html",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Cambridge",
+   "enabled": true,
+   "urls": [
+    "https://www.jobs.cam.ac.uk/job/?category=10"
+   ],
+   "pattern": "jobs\\.cam\\.ac\\.uk/job/\\d+|^/job/\\d+"
+  },
+  {
+   "id": "afterschoolafrica",
+   "name": "After School Africa",
+   "type": "rss",
+   "kind": "scholarship",
+   "enabled": true,
+   "urls": [
+    "https://www.afterschoolafrica.com/feed/"
+   ]
+  },
+  {
+   "id": "googlenews",
+   "name": "Google Actualités",
+   "type": "rss",
+   "kind": "auto",
+   "strip_source": true,
+   "enabled": true,
+   "urls": [
+    "https://news.google.com/rss/search?q=%22fully+funded+PhD%22+position+when:14d&hl=en&gl=GB&ceid=GB:en",
+    "https://news.google.com/rss/search?q=%22PhD+studentship%22+funded+when:14d&hl=en&gl=GB&ceid=GB:en",
+    "https://news.google.com/rss/search?q=%22PhD+scholarship%22+2027+when:14d&hl=en&gl=GB&ceid=GB:en",
+    "https://news.google.com/rss/search?q=%22postdoctoral%22+fellowship+2027+apply+when:14d&hl=en&gl=GB&ceid=GB:en",
+    "https://news.google.com/rss/search?q=%22master+scholarship%22+2027+fully+funded+when:14d&hl=en&gl=GB&ceid=GB:en",
+    "https://news.google.com/rss/search?q=PhD+%22sport+and+exercise+science%22+OR+%22sports+science%22+funded+when:14d&hl=en&gl=GB&ceid=GB:en",
+    "https://news.google.com/rss/search?q=%22contrat+doctoral%22+OR+%22thèse+financée%22+candidature+when:14d&hl=fr&gl=FR&ceid=FR:fr",
+    "https://news.google.com/rss/search?q=%22bourse+doctorale%22+OR+%22bourse+de+master%22+2027+when:14d&hl=fr&gl=FR&ceid=FR:fr"
+   ]
+  }
+ ]
 }
