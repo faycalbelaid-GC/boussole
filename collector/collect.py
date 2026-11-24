@@ -184,7 +184,11 @@ def parse_date(txt: str) -> str:
     return ""
 
 
-def level_of(txt: str) -> str:
+def level_of(txt: str, title: str = "") -> str:
+    if title and title != txt:
+        lv = level_of(title)
+        if lv:
+            return lv
     t = txt.lower()
     if re.search(r"post-?doc|post-doctoral|postdoctoral", t):
         return "Postdoc"
@@ -197,11 +201,16 @@ def level_of(txt: str) -> str:
     return ""
 
 
-def field_of(txt: str) -> str:
-    t = " " + txt.lower() + " "
-    for f, kws in FIELDS.items():
-        if any(k in t for k in kws):
-            return f
+def _has(t: str, k: str) -> bool:
+    return re.search(r"(?<![a-zà-ÿ])" + re.escape(k.strip()), t) is not None  # début de mot : « sport » ne matche pas « transport »
+
+
+def field_of(txt: str, title: str = "") -> str:
+    for part in ([title] if title else []) + [txt]:  # le titre d'abord, puis le texte
+        t = " " + part.lower() + " "
+        for f, kws in FIELDS.items():
+            if any(_has(t, k) for k in kws):
+                return f
     return "Pluridisciplinaire"
 
 
@@ -251,7 +260,8 @@ def make(src: dict, title: str, url: str, context: str, institution: str = "", d
     if len(title) < 8:
         return None
     whole = f"{title} {context}"
-    if not KEEP.search(whole) or DROP.search(title):
+    strict = src.get("kind") in ("auto", "scholarship")  # sites généralistes : le titre doit parler d'études
+    if not KEEP.search(title if strict else whole) or DROP.search(title) or re.search(r"\bintern(ship)?s?\b|\bstage\b", title, re.I):
         return None
     dl = parse_date(context) or parse_date(title) or date_hint
     if dl and dl < TODAY.isoformat():
@@ -262,8 +272,8 @@ def make(src: dict, title: str, url: str, context: str, institution: str = "", d
         "t": title,
         "u": clean(institution or src.get("institution", ""))[:120],
         "c": country_of(whole, src.get("country", "")),
-        "lvl": level_of(whole),
-        "f": field_of(whole),
+        "lvl": level_of(whole, title),
+        "f": field_of(context, title),
         "fund": funding_of(whole),
         "dl": dl,
         "url": url,
@@ -451,6 +461,12 @@ def main() -> int:
             by_url[it["url"]] = it
             added += 1
 
+    names = {x["name"] for x in cfg["sources"]} | {"LinkedIn (alertes)"}
+    for o in by_url.values():  # reclasse les offres collectées avec les règles du jour
+        if o.get("src") in names:
+            o["f"] = field_of("", o["t"]) if field_of("", o["t"]) != "Pluridisciplinaire" else o.get("f", "Pluridisciplinaire")
+            o["lvl"] = level_of(o["t"]) or o.get("lvl", "")
+    by_url = {u: o for u, o in by_url.items() if not (o.get("src") in names and (DROP.search(o["t"]) or re.search(r"\bintern(ship)?s?\b", o["t"], re.I)))}
     keep = []
     for o in by_url.values():
         if o.get("dl") and o["dl"] < TODAY.isoformat():
