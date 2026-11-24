@@ -1,11 +1,27 @@
 {
- "mis_a_jour": "2026-11-24T20:24+00:00",
- "total": 152,
- "nouvelles": 4,
+ "mis_a_jour": "2026-11-24T20:26+00:00",
+ "total": 174,
+ "nouvelles": 22,
  "sources": {
   "PositionClub (Telegram)": {
    "ok": true,
    "offres": 4
+  },
+  "directapply (Telegram)": {
+   "ok": true,
+   "offres": 0
+  },
+  "AzarApply (Telegram)": {
+   "ok": true,
+   "offres": 10
+  },
+  "AzarApplyGermany (Telegram)": {
+   "ok": true,
+   "offres": 0
+  },
+  "PhDFinderUK (Telegram)": {
+   "ok": true,
+   "offres": 13
   }
  }
 }
