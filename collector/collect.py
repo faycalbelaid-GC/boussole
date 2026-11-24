@@ -536,6 +536,7 @@ def main() -> int:
 
     for o in by_url.values():  # reclasse les offres collectées avec les règles du jour
         if o.get("auto"):
+            o["t"], o["u"] = tidy(o["t"]), tidy(o.get("u", ""))
             o["f"] = field_of("", o["t"])
             o["lvl"] = level_of(o["t"]) or o.get("lvl", "")
     by_url = {u: o for u, o in by_url.items() if not (o.get("auto") and (DROP.search(o["t"]) or re.search(r"\bintern(ship)?s?\b", o["t"], re.I)))}

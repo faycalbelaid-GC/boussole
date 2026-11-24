@@ -819,11 +819,11 @@
    "name": "directapply (Telegram)",
    "type": "telegram",
    "kind": "auto",
-   "enabled": true,
+   "enabled": false,
    "urls": [
     "https://t.me/s/directapply"
    ],
-   "note": "candidate"
+   "note": "Testé le 24/11/2026 : messages en persan, coupé"
   },
   {
    "id": "tg-azarapply",
@@ -834,18 +834,18 @@
    "urls": [
     "https://t.me/s/AzarApply"
    ],
-   "note": "candidate"
+   "note": "Testé le 24/11/2026 : fonctionne"
   },
   {
    "id": "tg-azarapplygermany",
    "name": "AzarApplyGermany (Telegram)",
    "type": "telegram",
    "kind": "auto",
-   "enabled": true,
+   "enabled": false,
    "urls": [
     "https://t.me/s/AzarApplyGermany"
    ],
-   "note": "candidate"
+   "note": "Testé le 24/11/2026 : aucun message public, coupé"
   },
   {
    "id": "tg-phdfinderuk",
@@ -856,7 +856,7 @@
    "urls": [
     "https://t.me/s/PhDFinderUK"
    ],
-   "note": "candidate"
+   "note": "Testé le 24/11/2026 : fonctionne"
   }
  ]
 }
