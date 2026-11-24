@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Boussole · doctorats, masters et bourses</title>
+<meta name="description" content="Offres de doctorat, master, postdoc et bourses dans le monde entier, mises à jour chaque nuit. Suivez vos candidatures, vos dates limites et préparez vos documents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: posé, précis, un peu chaleureux — le carnet de route d'un étudiant qui part
+   IDEA: un carnet de voyage : la route en 5 étapes, des dates tamponnées comme des visas
+   PICTURE: la route dessinée de l'accueil + le tampon compte à rebours « J-14 » sur chaque offre
+   COLOUR and TYPE: gris encre neutres, un accent encre de tampon (vermillon) rare ; Instrument Sans + Geist Mono
+   LAYOUT: menu 248 px calme, contenu fluide 1440 max, grille de 4 px, empilé sous 820 px
+   Passes inspirées de « unslop » par Damir Sokolovsky (@heydamir), CC BY 4.0 */
+:root{color-scheme:light dark;
+--bg:light-dark(#f5f7fa,#0b0d14);--side:light-dark(#eef1f5,#07080d);--card:light-dark(#ffffff,#11141c);--raised:light-dark(#eceff4,#1a1e28);
+--ink:light-dark(#111827,#eef0f5);--ink2:light-dark(#4b5565,#a3a9b8);--mut:light-dark(#6b7487,#7a8296);
+--line:light-dark(rgba(17,24,39,.09),rgba(238,240,245,.09));--line2:light-dark(rgba(17,24,39,.16),rgba(238,240,245,.16));
+--acc:light-dark(#c2410c,#ff8a5c);--accink:light-dark(#ffffff,#1d0c04);--acctext:light-dark(#b13a0a,#ff9b73);--accsoft:light-dark(#fbeee7,#2a1810);
+--ok:light-dark(#16a34a,#4cc38a);--bad:light-dark(#dc2626,#e5484d);
+--sh:light-dark(0 1px 2px rgba(0,0,0,.05),none);--shf:light-dark(0 8px 24px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.4));
+--ease:cubic-bezier(.22,1,.36,1);--mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 'Instrument Sans',system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:500;line-height:1.15;margin:0;text-wrap:balance}
+h1{font-size:clamp(26px,2.6vw,32px);letter-spacing:-.01em}h2{font-size:18px}h3{font-size:15px;line-height:1.35}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+[hidden]{display:none!important}
+.ic{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+/* navigation */
+.side{background:var(--side);border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:8px;font-weight:600;font-size:17px;padding:4px 10px 20px}
+.brand svg{width:22px;height:22px}
+.side a{display:flex;align-items:center;gap:10px;color:var(--ink2);text-decoration:none;padding:0 10px;height:36px;border-radius:8px;font-weight:500;font-size:14px;transition:background-color .15s var(--ease),color .15s var(--ease)}
+.side a .ic{color:var(--mut)}
+.side a:hover{background:var(--raised);color:var(--ink)}
+.side a.on{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line),var(--sh)}
+.side a.on .ic{color:var(--acc)}
+.side .grp{font-size:12px;color:var(--mut);padding:20px 10px 6px}
+.planbox{margin-top:auto;padding:12px 10px 4px;border-top:1px solid var(--line);font-size:13px;color:var(--ink2);display:grid;gap:8px}
+.planbox b{font-weight:500;color:var(--ink)}
+main{padding:32px clamp(16px,3vw,40px) 64px;max-width:1440px;width:100%}
+main>*{animation:rise .22s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(4px)}}
+/* primitives */
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sp{flex:1}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--sh)}
+.soft{background:var(--raised);border-color:transparent;box-shadow:none}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.btn{border:1px solid var(--line2);background:var(--card);border-radius:8px;padding:0 14px;height:36px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:500;font-size:14px;color:var(--ink);text-decoration:none;white-space:nowrap;transition:background-color .15s var(--ease),border-color .15s var(--ease),transform .12s var(--ease)}
+.btn:hover{background:var(--raised)}
+.btn:active{transform:scale(.98)}
+.btn .ic{color:var(--ink2)}
+.pri{background:var(--acc);border-color:var(--acc);color:var(--accink)}.pri:hover{background:var(--acc);filter:brightness(1.06)}
+.pri .ic{color:currentColor}
+.ghost{border-color:transparent;background:transparent;color:var(--ink2)}.ghost:hover{color:var(--ink)}
+.sm{height:32px;padding:0 10px;font-size:13px}
+.icon{width:32px;padding:0}
+.btn:disabled{opacity:.5;cursor:default}
+.lnk{background:none;border:0;padding:0;color:var(--acctext);font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:4px;font-size:14px}
+.lnk:hover{text-decoration:underline;text-underline-offset:3px}
+.mut{color:var(--ink2)}.small{font-size:14px}.tiny{font-size:12px;color:var(--mut)}
+.meta{font:12px/16px var(--mono);color:var(--mut);font-variant-numeric:tabular-nums}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:20px;padding:0 8px;border-radius:6px;background:var(--raised);color:var(--ink2);white-space:nowrap}
+.tag.a{background:var(--accsoft);color:var(--acctext)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--mut);flex:none}
+/* signature : tampon compte à rebours */
+.stamp{display:inline-flex;align-items:center;font:500 12px/1 var(--mono);font-variant-numeric:tabular-nums;padding:4px 6px;border:1px solid var(--line2);border-radius:4px;color:var(--ink2);white-space:nowrap;letter-spacing:.02em}
+.stamp.hot{border-color:var(--acc);color:var(--acctext);transform:rotate(-2deg)}
+.stamp.off{color:var(--mut);border-style:dashed}
+input[type=text],input[type=search],input[type=number],select,textarea{border:1px solid var(--line2);background:var(--card);border-radius:8px;padding:0 12px;height:36px;width:100%;font-size:14px;transition:border-color .15s var(--ease)}
+input:hover,select:hover,textarea:hover{border-color:var(--mut)}
+textarea{height:auto;min-height:120px;padding:10px 12px;resize:vertical;line-height:1.5}
+label.f{display:grid;gap:6px;font-size:13px;font-weight:500;color:var(--ink2)}
+input[type=checkbox],input[type=radio]{accent-color:var(--acc)}
+.pagehead{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-bottom:24px}
+.pagehead p{margin:8px 0 0;color:var(--ink2)}
+.section{margin-top:40px}
+.sechead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.sechead h2{flex:1}
+/* route (moment) */
+.route{position:relative;padding:8px 0 0;margin:0 0 24px;overflow-x:auto}
+.route svg{display:block;width:100%;min-width:640px;height:auto}
+.route .lbls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));min-width:640px;text-align:center;gap:8px}
+.route .lbls div{font-size:13px;color:var(--ink2);padding:0 4px}
+.route .lbls b{display:block;font-weight:500;color:var(--ink);font-size:14px}
+.route .lbls .cur b{color:var(--acctext)}
+.next{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:24px}
+.next h2{font-size:clamp(20px,2vw,24px);margin:8px 0 6px}
+.next .acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.chk:last-child{border:0}
+.chk input{width:18px;height:18px;margin-top:2px;flex:none}
+.chk.done span{text-decoration:line-through;color:var(--mut)}
+.dl{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.dl:last-child{border:0}
+.dl button{background:none;border:0;padding:0;text-align:left}
+.dl button:hover h3{text-decoration:underline;text-underline-offset:3px}
+/* cartes d'offres */
+.opp{display:grid;gap:8px;align-content:start;position:relative;transition:border-color .15s var(--ease)}
+.opp:hover{border-color:var(--line2)}
+.opp .top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.opp h3{font-size:15px;font-weight:500}
+.opp .open{all:unset;cursor:pointer}
+.opp .open::after{content:'';position:absolute;inset:0;border-radius:14px}
+.opp .open:focus-visible::after{outline:2px solid var(--acc);outline-offset:2px}
+.opp .acts{display:flex;gap:4px;align-items:center;margin-top:4px;position:relative;z-index:1}
+.opp .fund{font-size:13px;color:var(--ink2)}
+.saved{color:var(--acctext)}.saved .ic{fill:currentColor;color:var(--acc)}
+.list{display:grid;gap:8px}
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.tool{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:16px;display:grid;gap:4px;align-content:start;transition:border-color .15s var(--ease),background-color .15s var(--ease)}
+.tool:hover{border-color:var(--line2);background:var(--raised)}
+.tool b{font-weight:500;font-size:14px;display:flex;align-items:center;gap:8px}
+.tool b .ic{color:var(--mut)}
+.tool span{font-size:13px;color:var(--ink2)}
+/* twin */
+.twin{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;height:calc(100vh - 96px);min-height:540px}
+.chats{display:flex;flex-direction:column;gap:2px;overflow:auto;border-right:1px solid var(--line);padding-right:16px}
+.chats .it{display:flex;align-items:center;gap:2px;border-radius:8px;height:36px;padding-right:2px}
+.chats .it:hover{background:var(--raised)}
+.chats .it.on{background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.chats .it button.t{flex:1;text-align:left;border:0;background:none;padding:0 10px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:36px;color:var(--ink2)}
+.chats .it.on button.t{color:var(--ink)}
+.chats .it .btn{opacity:0}.chats .it:hover .btn,.chats .it.on .btn,.chats .it .btn:focus-visible{opacity:1}
+.conv{display:flex;flex-direction:column;min-height:0;max-width:880px;width:100%}
+.msgs{flex:1;overflow:auto;display:flex;flex-direction:column;gap:16px;padding:4px 4px 16px}
+.m{max-width:720px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}
+.m.u{align-self:flex-end;background:var(--raised);padding:10px 14px;border-radius:14px 14px 4px 14px}
+.m.a{padding:2px 0}
+.m.act{font:12px/16px var(--mono);color:var(--mut);display:flex;gap:8px;align-items:center}
+.m.act::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--acc);flex:none}
+.composer{border:1px solid var(--line2);border-radius:14px;padding:8px;display:grid;gap:4px;background:var(--card);box-shadow:var(--sh)}
+.composer textarea{border:0;min-height:56px;padding:8px;resize:none;background:transparent}
+.composer textarea:focus{outline:none}
+.gauge{width:64px;height:4px;border-radius:4px;background:var(--raised);overflow:hidden}.gauge i{display:block;height:100%;background:var(--ink2)}
+.chip{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:var(--ink2);border-radius:8px;padding:0 8px;height:32px;background:transparent}
+label.chip{border:1px solid var(--line);cursor:pointer}
+label.chip:has(input:checked){border-color:var(--line2);background:var(--raised);color:var(--ink)}
+.fileb{position:relative;overflow:hidden}.fileb input{position:absolute;inset:0;opacity:0;cursor:pointer}
+/* tracker */
+.tabs{display:inline-flex;gap:2px;background:var(--raised);padding:2px;border-radius:10px;max-width:100%;overflow-x:auto}
+.tabs button,.tabs label{border:0;background:none;border-radius:8px;padding:0 12px;height:32px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:13px;color:var(--ink2);font-weight:500}
+.tabs button.on,.tabs label:has(input:checked){background:var(--card);color:var(--ink);box-shadow:var(--sh),inset 0 0 0 1px var(--line)}
+.tabs label input{position:absolute;opacity:0;pointer-events:none}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;color:var(--mut);font-weight:500;padding:8px 12px;border-bottom:1px solid var(--line)}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+td select{height:32px;font-size:13px}
+tr.sel td{background:var(--raised)}
+.kpi span{font-size:13px;color:var(--ink2)}
+.kpi b{display:block;font:500 28px/1.1 'Instrument Sans',sans-serif;font-variant-numeric:tabular-nums;margin-top:8px}
+/* panneau & fenêtre */
+.ov{position:fixed;inset:0;background:rgba(7,8,13,.45);z-index:20;display:none}
+.ov.on{display:block;animation:fade .16s var(--ease)}
+@keyframes fade{from{opacity:0}}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--card);border-left:1px solid var(--line);z-index:21;padding:24px;overflow:auto;transform:translateX(104%);transition:transform .22s var(--ease);box-shadow:var(--shf)}
+.drawer.on{transform:none}
+.drawer p{margin:8px 0}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-48%);opacity:0;width:min(640px,calc(100% - 24px));max-height:calc(100vh - 32px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;z-index:22;display:none;box-shadow:var(--shf)}
+.modal.on{display:block;transform:translate(-50%,-50%);opacity:1;animation:pop .2s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translate(-50%,-48%)}}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,8px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:30;opacity:0;transition:opacity .16s var(--ease),transform .16s var(--ease);pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.plans .card{display:grid;gap:12px;align-content:start}
+.plans ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink2)}
+.price{font:500 28px 'Instrument Sans',sans-serif}
+.empty{padding:32px;text-align:center;color:var(--ink2);border:1px dashed var(--line2);border-radius:14px}
+.note{font-size:13px;color:var(--mut)}
+pre.doc{white-space:pre-wrap;font:14px/1.6 'Instrument Sans',sans-serif;margin:0}
+ol#plog{font:12px/20px var(--mono);color:var(--ink2)}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+fieldset{border:1px solid var(--line);border-radius:12px;padding:12px;margin:0}
+legend{font-size:13px;color:var(--ink2);padding:0 4px}
+[data-ask],[data-askt],[data-elig],[data-analyze],[data-prospect],[data-runalert],[data-go=twin],.twinbox,.eligsec{display:none!important}
+main>h1+p,main>.row:first-child+p{margin:8px 0 24px;color:var(--ink2)}
+main>.row:first-child h1{margin:0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:1100px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:820px){
+.app{grid-template-columns:1fr}
+.side{position:sticky;top:0;height:auto;flex-direction:row;overflow-x:auto;padding:8px;z-index:10;border-right:0;border-bottom:1px solid var(--line);gap:2px}
+.side>*{flex:none}.side .brand{padding:0 8px}.side .grp,.planbox{display:none}
+.side a{white-space:nowrap;height:40px}
+main{padding:24px 16px 48px}
+.twin{grid-template-columns:1fr;height:auto}.chats{border:0;padding:0;max-height:160px}
+.next{grid-template-columns:1fr}
+.btn{height:40px}.sm{height:36px}
+}
+@media(max-width:600px){.route svg,.route .lbls{min-width:0}.route .lbls div{font-size:11px;padding:0}.route .lbls b{font-size:12px}.route .lbls .meta{display:none}.dl .tag{display:none}.g2,.g3,.g4{grid-template-columns:1fr}table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:8px;border-bottom:1px solid var(--line)}.stack td{display:flow-root;border:0;padding:4px 0;padding-inline-start:7em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:6.5em;margin-inline-start:-7em;color:var(--mut)}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<div class="app">
+<nav class="side" id="side" aria-label="Navigation principale"></nav>
+<main id="main" tabindex="-1"></main>
+</div>
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer" aria-label="Détail"></aside>
+<div class="modal" id="modal" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,10);
+const today=()=>new Date().toISOString().slice(0,10);
+const fmtD=d=>d?new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'short'}):'';
+const addDays=(n,base)=>{const d=base?new Date(base):new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const I=p=>`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
+const ICS={check:I('<path d="M20 6 9 17l-5-5"/>'),x:I('<path d="M18 6 6 18M6 6l12 12"/>'),star:I('<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/>'),bookmark:I('<path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>'),ext:I('<path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'),clip:I('<path d="m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/>'),search:I('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'),arrow:I('<path d="M5 12h14M13 6l6 6-6 6"/>'),plus:I('<path d="M12 5v14M5 12h14"/>'),send:I('<path d="M12 19V5M5 12l7-7 7 7"/>'),msg:I('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-5A8 8 0 1 1 21 12z"/>'),pen:I('<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'),user:I('<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>'),list:I('<path d="M4 6h16M4 12h16M4 18h10"/>')};
+
+const IC={home:I('<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'),twin:I('<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>'),pos:I('<path d="M3 7h18v13H3zM8 7V4h8v3"/>'),sch:I('<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/>'),prof:I('<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>'),trk:I('<path d="M4 6h16M4 12h16M4 18h10"/>'),doc:I('<path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/>'),bell:I('<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/>'),plan:I('<path d="M12 2l3 7h7l-6 4 2 8-6-5-6 5 2-8-6-4h7z"/>'),map:I('<path d="M9 4l6 2 6-2v16l-6 2-6-2-6 2V6z"/><path d="M9 4v16M15 6v16"/>')};
+
+/* ---------- Catalogue réel (prospecté le 24 nov. 2026) + offres trouvées par vos prospections ---------- */
+let SEED=[];let META=null;
+const FIELDS=[
+['Sport & activité physique',[['Sciences du sport et de l\'exercice','sport and exercise science'],['STAPS & activité physique adaptée','physical activity health adapted physical activity'],['Biomécanique','biomechanics'],['Physiologie de l\'exercice','exercise physiology'],['Psychologie du sport','sport psychology'],['Management du sport','sport management'],['Entraînement & performance','sports performance coaching'],['Nutrition du sport','sports nutrition']]],
+['Ingénierie & technologie',[['Génie civil','civil engineering'],['Génie mécanique','mechanical engineering'],['Génie électrique & énergie','electrical engineering power systems'],['Génie aérospatial','aerospace engineering'],['Génie chimique & procédés','chemical engineering'],['Génie biomédical','biomedical engineering'],['Science des matériaux','materials science'],['Robotique','robotics'],['Télécommunications','telecommunications'],['Énergies renouvelables','renewable energy'],['Transport & logistique','transport logistics'],['Génie industriel','industrial engineering'],['Nanotechnologies','nanotechnology']]],
+['Informatique & données',[['Informatique','computer science'],['Intelligence artificielle','artificial intelligence machine learning'],['Science des données','data science'],['Cybersécurité','cybersecurity'],['Mathématiques','mathematics'],['Statistique','statistics'],['Informatique quantique','quantum computing']]],
+['Sciences fondamentales',[['Physique','physics'],['Chimie','chemistry'],['Astronomie & astrophysique','astrophysics'],['Sciences de la Terre & climat','earth science climate'],['Océanographie & sciences marines','marine science oceanography'],['Sciences de l\'environnement','environmental science'],['Écologie & biodiversité','ecology biodiversity'],['Géologie','geology']]],
+['Vie & santé',[['Biologie & sciences de la vie','biology life sciences'],['Microbiologie','microbiology'],['Génétique & génomique','genetics genomics'],['Biochimie & biologie moléculaire','biochemistry molecular biology'],['Neurosciences','neuroscience'],['Immunologie','immunology'],['Médecine & sciences médicales','medicine medical sciences'],['Pharmacie & pharmacologie','pharmacology pharmacy'],['Santé publique','public health epidemiology'],['Soins infirmiers','nursing'],['Odontologie','dentistry'],['Sciences vétérinaires','veterinary science'],['Nutrition & alimentation','nutrition'],['Kinésithérapie & réadaptation','physiotherapy rehabilitation'],['Psychiatrie & santé mentale','mental health psychiatry']]],
+['Agriculture & alimentation',[['Agronomie & agriculture','agriculture agronomy'],['Sciences alimentaires','food science'],['Sciences forestières','forestry'],['Pêche & aquaculture','aquaculture fisheries']]],
+['Sciences humaines & sociales',[['Psychologie','psychology'],['Sociologie','sociology'],['Sciences politiques & relations internationales','political science international relations'],['Anthropologie','anthropology'],['Géographie','geography'],['Histoire','history'],['Philosophie','philosophy'],['Sciences de l\'éducation','education'],['Linguistique & langues','linguistics'],['Lettres & humanités','humanities literature'],['Communication & médias','media communication'],['Études du développement','development studies'],['Archéologie','archaeology'],['Études de genre','gender studies'],['Théologie & sciences religieuses','theology religious studies']]],
+['Économie, droit & gestion',[['Économie','economics'],['Finance','finance'],['Gestion & management','management business'],['Marketing','marketing'],['Comptabilité','accounting'],['Droit','law'],['Tourisme & hôtellerie','tourism hospitality'],['Politiques publiques','public policy']]],
+['Arts, design & architecture',[['Architecture & urbanisme','architecture urban planning'],['Arts & design','art design'],['Musique','music'],['Cinéma & audiovisuel','film studies'],['Arts du spectacle','performing arts']]],
+['Autre',[['Pluridisciplinaire','interdisciplinary']]]];
+const FEN={};FIELDS.forEach(g=>g[1].forEach(([f,e])=>FEN[f]=e));
+const fieldEn=f=>FEN[f]||f||'';
+const CEN={'Royaume-Uni':'UK','France':'France','Allemagne':'Germany','Pays-Bas':'Netherlands','Belgique':'Belgium','Suisse':'Switzerland','Suède':'Sweden','Norvège':'Norway','Danemark':'Denmark','Finlande':'Finland','Irlande':'Ireland','Italie':'Italy','Espagne':'Spain','Portugal':'Portugal','Autriche':'Austria','Luxembourg':'Luxembourg','Pologne':'Poland','Tchéquie':'Czech Republic','Canada':'Canada','États-Unis':'USA','Australie':'Australia','Nouvelle-Zélande':'New Zealand','Japon':'Japan','Corée du Sud':'South Korea','Chine':'China','Singapour':'Singapore','Hong Kong':'Hong Kong','Israël':'Israel','Émirats arabes unis':'UAE','Qatar':'Qatar','Arabie saoudite':'Saudi Arabia','Afrique du Sud':'South Africa','Maroc':'Morocco','Turquie':'Turkey','Brésil':'Brazil'};
+const COUNTRIES=Object.keys(CEN);
+const PLATFORMS=[
+{id:'findaphd',n:'FindAPhD',site:'findaphd.com',k:['position','scholarship'],on:1},
+{id:'euraxess',n:'EURAXESS',site:'euraxess.ec.europa.eu',k:['position'],on:1},
+{id:'academicpositions',n:'Academic Positions',site:'academicpositions.com',k:['position'],on:1},
+{id:'linkedin',n:'LinkedIn',site:'linkedin.com/jobs',k:['position','professor'],on:1},
+{id:'x',n:'X (Twitter)',site:'x.com',k:['position','scholarship','professor'],on:1},
+{id:'unis',n:'Sites universitaires',site:'',k:['position','scholarship','professor'],on:1},
+{id:'jobsacuk',n:'jobs.ac.uk',site:'jobs.ac.uk',k:['position']},
+{id:'academictransfer',n:'AcademicTransfer',site:'academictransfer.com',k:['position']},
+{id:'naturecareers',n:'Nature Careers',site:'nature.com/naturecareers',k:['position']},
+{id:'sciencecareers',n:'Science Careers',site:'jobs.sciencecareers.org',k:['position']},
+{id:'jobrxiv',n:'jobRxiv',site:'jobrxiv.org',k:['position']},
+{id:'scholarshipdb',n:'ScholarshipDb',site:'scholarshipdb.net',k:['position','scholarship'],on:1},
+{id:'findamasters',n:'FindAMasters',site:'findamasters.com',k:['position','scholarship']},
+{id:'phdportal',n:'PhDportal / Mastersportal',site:'mastersportal.com',k:['scholarship'],on:1},
+{id:'scholars4dev',n:'Scholars4Dev',site:'scholars4dev.com',k:['scholarship'],on:1},
+{id:'opportunitydesk',n:'Opportunity Desk',site:'opportunitydesk.org',k:['scholarship']},
+{id:'daad',n:'DAAD',site:'daad.de',k:['scholarship']},
+{id:'campusfrance',n:'Campus France',site:'campusfrance.org',k:['scholarship']},
+{id:'adum',n:'ADUM (thèses France)',site:'adum.fr',k:['position']},
+{id:'abg',n:'ABG (thèses France)',site:'abg.asso.fr',k:['position']},
+{id:'inomics',n:'INOMICS (économie)',site:'inomics.com',k:['position','scholarship']},
+{id:'higheredjobs',n:'HigherEdJobs (USA)',site:'higheredjobs.com',k:['position']},
+{id:'researchgate',n:'ResearchGate',site:'researchgate.net',k:['position','professor']},
+{id:'facebook',n:'Facebook',site:'facebook.com',k:['position','scholarship']}];
+let CAT=[];
+function rebuildCat(){const seen=new Set(),hid=new Set(S.hidden||[]);CAT=[];for(const o of [...S.found,...SEED]){if(seen.has(o.url)||hid.has(o.id))continue;seen.add(o.url);CAT.push(o)}}
+const byId=id=>CAT.find(o=>o.id===id)||S.found.find(o=>o.id===id)||SEED.find(o=>o.id===id);
+const ALL={get position(){return CAT.filter(o=>o.k==='position')},get scholarship(){return CAT.filter(o=>o.k==='scholarship')},get professor(){return CAT.filter(o=>o.k==='professor')}};
+const isPast=o=>o.dl&&o.dl<today();
+const safeUrl=u=>/^https:\/\//.test(u||'')?u:'';
+const KLAB={position:'Poste',scholarship:'Bourse',professor:'Professeur'};
+const STATUS=['À faire','Email envoyé','2e email envoyé','En contact','Candidature envoyée','Entretien','Accepté','Refusé','Sans réponse'];
+const STAGES=['Où postuler','Test d\'anglais','Documents','Candidature & entretien','Visa & départ'];
+const PLANS={free:{n:'Gratuit',day:5,month:60,think:2,alerts:10,prof:10},premium:{n:'Premium',day:10,month:1e9,think:2,alerts:1,prof:10},pro:{n:'Pro',day:1e9,month:800,think:4,alerts:3,prof:1e9}};
+const THINK=['Off','Léger','Équilibré','Profond','Max'];
+const FOLDERS=['CV','Lettres & SOP','Emails','Propositions','Autres'];
+
+/* ---------- État ---------- */
+const blank=()=>({v:1,upd:0,profile:{name:'',level:'',field:'',countries:[],start:'',english:'',gpa:'',set:false},roadmap:[],tracker:[],history:[],docs:[],alerts:[],plan:'free',credits:{d:today(),dUsed:0,m:today().slice(0,7),mUsed:0},chats:[],ev:[],think:2,mentor:[],found:[],hidden:[],scans:[]});
+let S=blank();
+try{const r=localStorage.getItem('boussole');if(r)S=Object.assign(blank(),JSON.parse(r))}catch(e){}
+rebuildCat();
+let db=null,myId=null,saveT=null,writing=false,dirty=false;
+function save(){S.upd=Date.now();try{localStorage.setItem('boussole',JSON.stringify(S))}catch(e){}clearTimeout(saveT);saveT=setTimeout(flush,1200)}
+async function flush(){if(!db||!myId)return;if(writing){dirty=true;return}writing=true;
+ try{const {chats,docs,found,...core}=S;const base='data/users/'+myId;
+  await db.doc(base+'/found').set({list:found.slice(0,450)});
+  await db.doc(base+'/core').set(JSON.parse(JSON.stringify(core)));
+  await db.doc(base+'/chats').set({list:chats.slice(0,40).map(c=>({...c,msgs:c.msgs.slice(-60)}))});
+  await db.doc(base+'/docs').set({list:docs.slice(0,120)});
+ }catch(e){if(e&&e.code==='quota_exceeded')toast('Stockage plein : supprimez d\'anciens documents.')}
+ writing=false;if(dirty){dirty=false;flush()}}
+function logEv(k){S.ev.push({k,t:Date.now()});const cut=Date.now()-30*864e5;S.ev=S.ev.filter(e=>e.t>cut)}
+
+function buildRoadmap(){
+ const p=S.profile,custom=S.roadmap.filter(t=>t.custom||t.done);
+ const lv=p.level||'Master',eng=p.english||'IELTS ou TOEFL';
+ const T=[[0,'Définir 8 à 12 cibles ('+lv+', '+(p.field||'votre domaine')+')',7],[0,lv==='Master'||lv==='Licence'?'Comparer frais, bourses et prérequis des programmes':'Contacter 5 professeurs dont la recherche correspond',14],[0,'Activer une alerte d\'opportunités',3],
+ [1,'Choisir le test ('+eng+') et le score visé',10],[1,'Réserver la date du test',20],[1,'Passer le test et envoyer les scores',45],
+ [2,'Mettre à jour le CV académique',12],[2,lv==='Master'||lv==='Licence'?'Rédiger la lettre de motivation (SOP)':'Rédiger la proposition de recherche',25],[2,'Demander 2 à 3 lettres de recommandation',20],[2,'Traduire et certifier relevés de notes',30],
+ [3,'Envoyer les candidatures prioritaires',40],[3,'Préparer l\'entretien (simulations)',50],[3,'Suivre les relances sans réponse',55],
+ [4,'Réunir les justificatifs financiers',75],[4,'Déposer la demande de visa',85],[4,'Logement et voyage',100]];
+ const keep=new Set(custom.map(t=>t.title));
+ S.roadmap=custom.concat(T.filter(t=>!keep.has(t[1])).map(([st,title,d])=>({id:uid(),stage:st,title,due:addDays(d),done:false})));
+}
+const stageProg=i=>{const t=S.roadmap.filter(x=>x.stage===i);return t.length?t.filter(x=>x.done).length/t.length:0};
+const curStage=()=>{for(let i=0;i<5;i++)if(stageProg(i)<1)return i;return 4};
+const nextTask=()=>S.roadmap.filter(t=>!t.done).sort((a,b)=>a.stage-b.stage||a.due.localeCompare(b.due))[0];
+
+/* ---------- Crédits ---------- */
+function credits(){const P=PLANS[S.plan],c=S.credits;if(c.d!==today()){c.d=today();c.dUsed=0}if(c.m!==today().slice(0,7)){c.m=today().slice(0,7);c.mUsed=0}
+ return Math.max(0,Math.round(Math.min(P.day-c.dUsed,P.month-c.mUsed)*10)/10)}
+function spend(n){S.credits.dUsed+=n;S.credits.mUsed+=n}
+const cost=txt=>Math.round((0.4+txt.length/1500)*(1+S.think*0.5)*10)/10;
+
+/* ---------- UI de base ---------- */
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2400)}
+function closeAll(){$('#ov').classList.remove('on');$('#drawer').classList.remove('on');$('#modal').classList.remove('on')}
+$('#ov').onclick=closeAll;document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+function modal(html){const m=$('#modal');m.innerHTML=html;m.classList.add('on');$('#ov').classList.add('on');const f=m.querySelector('input,textarea,select,button');f&&f.focus()}
+function drawer(html){const d=$('#drawer');d.innerHTML=html;d.classList.add('on');$('#ov').classList.add('on')}
+
+const NAV=[['home','Accueil',IC.home],['roadmap','Feuille de route',IC.map],null,['positions','Postes',IC.pos],['scholarships','Bourses',IC.sch],['professors','Professeurs',IC.prof],null,['tracker','Tracker',IC.trk],['documents','Documents',IC.doc],['alerts','Alertes',IC.bell]];
+function side(v){
+ let g=0;const P=PLANS[S.plan],cr=credits(),mx=Math.min(P.day,P.month);
+ $('#side').innerHTML=`<div class="brand"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.25" style="fill:none;stroke:var(--ink);stroke-width:1.5"/><path d="M15.5 8.5 13.2 13.2 8.5 15.5 10.8 10.8z" style="fill:var(--acc)"/></svg>Boussole</div>`+
+ NAV.map(n=>n?`<a href="#${n[0]}" class="${v===n[0]?'on':''}" ${v===n[0]?'aria-current="page"':''}>${n[2]}${n[1]}</a>`:`<div class="grp">${['Explorer','Suivre'][g++]}</div>`).join('')+
+ `<div class="planbox"><span class="meta">${META?'Mis à jour le '+new Date(META.mis_a_jour).toLocaleDateString('fr-FR',{day:'numeric',month:'short'})+' · '+META.total+' offres':'Chargement des offres'}</span><a class="lnk" style="font-size:13px" href="https://github.com/faycalbelaid-GC/boussole" target="_blank" rel="noopener">Code et sources</a></div>`}
+
+/* ---------- Accueil ---------- */
+function goalsLine(){const p=S.profile;return p.set?`${esc(p.level)} en ${esc(p.field)} · ${esc(p.countries.join(', ')||'tous pays')}${p.start?' · rentrée '+esc(p.start):''}`:'Objectif non défini'}
+function oppCard(k,o){const tr=S.tracker.find(x=>x.ref===o.id);return `<article class="card opp"><div class="top">${stamp(o)}<span class="meta">${esc(o.lvl||KLAB[k])} · ${esc(o.src||'')}</span></div>
+ <h3><button class="open" data-open="${k}:${o.id}">${esc(o.t)}</button></h3>
+ <div class="small mut">${esc(o.u)}${o.c?' · '+esc(o.c):''}</div>${o.fund?`<div class="fund">${esc(o.fund)}</div>`:''}<div class="tiny">${esc(o.f||'')}</div>
+ <div class="acts"><button class="btn sm ${tr?'saved':''}" data-track="${k}:${o.id}" aria-pressed="${tr?'true':'false'}">${ICS.bookmark}${tr?'Suivi':'Suivre'}</button>${safeUrl(o.url)?`<a class="btn sm ghost" href="${esc(o.url)}" target="_blank" rel="noopener">${ICS.ext}Annonce</a>`:''}</div></article>`}
+function score(o){const p=S.profile;let s=0;if(p.field&&o.f===p.field)s+=4;else if(p.field&&FIELDS.find(g=>g[1].some(x=>x[0]===p.field)&&g[1].some(x=>x[0]===o.f)))s+=2;if(o.f==='Pluridisciplinaire')s+=1;if(p.countries.includes(o.c))s+=2;if(p.level&&o.lvl===p.level)s+=2;if(isPast(o))s-=10;return s}
+function matches(k){return ALL[k].map(o=>[score(o),o]).sort((a,b)=>b[0]-a[0]||(a[1].dl||'9').localeCompare(b[1].dl||'9')).map(x=>x[1])}
+function stamp(o){if(!o||!o.dl)return '';const d=Math.round((new Date(o.dl)-new Date(today()))/864e5);if(d<0)return `<span class="stamp off" title="Clôturée le ${fmtD(o.dl)}">Clos</span>`;return `<span class="stamp ${d<=14?'hot':''}" title="Date limite : ${fmtD(o.dl)}">J-${d}</span>`}
+function route(){const cs=curStage(),pts=[[100,50],[300,30],[500,54],[700,28],[900,46]];
+ let d=`M${pts[0][0]} ${pts[0][1]}`;for(let i=1;i<5;i++){const [a,b]=pts[i-1],[x,y]=pts[i];d+=` C${a+100} ${b} ${x-100} ${y} ${x} ${y}`}
+ const prog=Math.min(1,(cs+stageProg(cs))/4)*100;
+ const nodes=pts.map(([x,y],i)=>{const done=stageProg(i)>=1;return i===cs&&!done?`<circle cx="${x}" cy="${y}" r="11" style="fill:var(--card);stroke:var(--acc);stroke-width:2"/><circle cx="${x}" cy="${y}" r="4.5" style="fill:var(--acc)"/>`:done?`<circle cx="${x}" cy="${y}" r="10" style="fill:var(--acc)"/><path d="M${x-4.5} ${y}l3 3 6-6" style="fill:none;stroke:var(--accink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round"/>`:`<circle cx="${x}" cy="${y}" r="7" style="fill:var(--card);stroke:var(--line2);stroke-width:1.5"/>`}).join('');
+ return `<div class="route" aria-label="Votre route en 5 étapes"><svg viewBox="0 0 1000 80" role="img" aria-hidden="true"><path d="${d}" pathLength="100" style="fill:none;stroke:var(--line2);stroke-width:2;stroke-dasharray:1.2 1.2"/><path d="${d}" pathLength="100" style="fill:none;stroke:var(--acc);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:${prog} 100"/>${nodes}</svg>
+ <div class="lbls">${STAGES.map((s,i)=>{const ts=S.roadmap.filter(t=>t.stage===i);return `<div class="${i===cs?'cur':''}"><b>${esc(s)}</b><span class="meta">${ts.filter(t=>t.done).length}/${ts.length} tâches</span></div>`}).join('')}</div></div>`}
+function deadlines(){const tr=new Set(S.tracker.map(t=>t.ref));const up=CAT.filter(o=>o.dl&&!isPast(o)&&(tr.has(o.id)||score(o)>=4)).sort((a,b)=>(tr.has(b.id)-tr.has(a.id))||a.dl.localeCompare(b.dl)).slice(0,6).sort((a,b)=>a.dl.localeCompare(b.dl));
+ return up.length?up.map(o=>`<div class="dl">${stamp(o)}<button data-open="${o.k}:${o.id}"><h3>${esc(o.t)}</h3><span class="tiny">${esc(o.u)} · ${fmtD(o.dl)}</span></button>${tr.has(o.id)?`<span class="tag a">Suivi</span>`:'<span></span>'}</div>`).join(''):'<p class="mut small">Aucune date limite proche pour votre profil. Lancez une prospection.</p>'}
+function home(){
+ const p=S.profile;if(!p.set){onboarding();return `<h1>Votre objectif d'abord</h1><p class="mut">Quelques questions sur ce que vous voulez étudier et où ; la feuille de route se construit à partir de vos réponses.</p><button class="btn pri" data-act="onboard">Définir mon objectif</button>`}
+ const nt=nextTask(),up=S.roadmap.filter(t=>!t.done&&t!==nt).sort((a,b)=>a.due.localeCompare(b.due)).slice(0,5);
+ const date=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+ return `<div class="pagehead"><div class="sp"><div class="meta">${esc(date)}${p.name?' · '+esc(p.name):''}</div><h1 style="margin-top:8px">${esc(p.level)} en ${esc(p.field)}</h1><p>${esc(p.countries.join(', ')||'Tous pays')}${p.start?' · rentrée '+esc(p.start):''} · <button class="lnk" data-act="onboard">Modifier l'objectif</button></p></div><a class="lnk" href="#roadmap">Feuille de route ${ICS.arrow}</a></div>
+ ${route()}
+ ${nt?`<section class="card next"><div><span class="meta">Prochaine étape · ${esc(STAGES[nt.stage])}</span><h2>${esc(nt.title)}</h2><div class="row small mut">${stamp({dl:nt.due})}<span>Avant le ${fmtD(nt.due)}</span></div></div>
+ <div class="acts"><button class="btn pri" data-done="${nt.id}">${ICS.check}Marquer comme fait</button><button class="btn" data-askt="${esc(nt.title)}">Demander au Twin</button><button class="lnk" data-act="mentor">Avis d'un mentor</button></div></section>`:'<section class="card next"><h2>Toutes les étapes sont faites</h2></section>'}
+ <div class="grid g2" style="margin-top:16px">
+ <div class="card"><div class="sechead"><h2>Prochaines dates limites</h2><a class="lnk" href="#tracker">Tracker</a></div>${deadlines()}</div>
+ <div class="card"><div class="sechead"><h2>À faire</h2><a class="lnk" href="#roadmap">Tout voir</a></div>${up.length?up.map(t=>`<label class="chk"><input type="checkbox" data-tick="${t.id}"><span class="sp">${esc(t.title)}<br><span class="tiny">${fmtD(t.due)} · ${esc(STAGES[t.stage])}</span></span></label>`).join(''):'<p class="mut small">Rien à venir.</p>'}</div></div>
+ <div class="section"><div class="sechead"><h2>Opportunités pour vous</h2><button class="btn sm" data-prospect="position">${ICS.search}Prospecter</button><a class="lnk" href="#positions">Tout voir</a></div>
+ <div class="grid g3">${[...matches('position').slice(0,4),...matches('scholarship').slice(0,2)].map(o=>oppCard(o.k,o)).join('')}</div>
+ <p class="note" style="margin-top:12px">${CAT.length} offres réelles issues de ${new Set(CAT.map(o=>o.src)).size} sources, mises à jour chaque nuit. Vérifiez toujours les conditions sur l'annonce officielle.</p></div>
+ <div class="section"><div class="sechead"><h2>Raccourcis</h2></div><div class="tools">
+ <button class="tool" data-go="twin"><b>${ICS.msg}Demander au Twin</b><span>Questions, plans, relectures</span></button>
+ <button class="tool" data-go="professors"><b>${ICS.user}Trouver des professeurs</b><span>Encadrants dans votre sujet</span></button>
+ <button class="tool" data-gen="sop"><b>${ICS.pen}Rédiger un document</b><span>Lettre, CV, email, proposition</span></button>
+ <button class="tool" data-go="tracker"><b>${ICS.list}Suivre mes candidatures</b><span>${S.tracker.length} élément(s) suivi(s)</span></button>
+ <button class="tool" data-act="mentor"><b>${ICS.user}Avis d'un mentor</b><span>Relecture de vos choix et documents</span></button>
+ <button class="tool" data-act="delegate"><b>${ICS.arrow}Déléguer la candidature</b><span>Une équipe prépare et dépose, vous validez</span></button></div></div>`}
+function fieldOptions(sel){return FIELDS.map(([g,l])=>`<optgroup label="${esc(g)}">${l.map(([f])=>`<option ${sel===f?'selected':''}>${esc(f)}</option>`).join('')}</optgroup>`).join('')}
+function onboarding(){
+ const p=S.profile,cs=COUNTRIES,known=!!FEN[p.field];
+ modal(`<h2>Votre objectif</h2><p class="mut small">La feuille de route et les suggestions s'adaptent à vos réponses. Les tâches déjà faites sont conservées.</p>
+ <form id="onb" class="grid" style="margin-top:14px">
+ <label class="f">Prénom<input type="text" name="name" value="${esc(p.name)}" autocomplete="given-name"></label>
+ <div class="grid g2"><label class="f">Niveau visé<select name="level">${['Licence','Master','PhD','Postdoc'].map(l=>`<option ${p.level===l?'selected':''}>${l}</option>`).join('')}</select></label>
+ <label class="f">Domaine<select name="field">${fieldOptions(known?p.field:'')}</select></label></div>
+ <label class="f">Autre domaine ou sujet précis (facultatif)<input type="text" name="fieldx" placeholder="Ex. : physiologie du football féminin" value="${esc(known?'':p.field)}"></label>
+ <fieldset class="card" style="padding:12px;max-height:220px;overflow:auto"><legend class="small">Pays visés</legend><div class="row">${cs.map(c=>`<label class="chip"><input type="checkbox" name="c" value="${c}" ${p.countries.includes(c)?'checked':''}>${c}</label>`).join('')}</div></fieldset>
+ <div class="grid g3"><label class="f">Rentrée visée<input type="text" name="start" placeholder="Sept. 2027" value="${esc(p.start)}"></label>
+ <label class="f">Test d'anglais<select name="english">${['IELTS','TOEFL','Duolingo','Déjà validé'].map(l=>`<option ${p.english===l?'selected':''}>${l}</option>`).join('')}</select></label>
+ <label class="f">Moyenne<input type="text" name="gpa" placeholder="15/20" value="${esc(p.gpa)}"></label></div>
+ <div class="row"><span class="sp"></span><button type="button" class="btn" data-act="close">Annuler</button><button class="btn pri">Construire ma feuille de route</button></div></form>`);
+ $('#onb').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);Object.assign(S.profile,{name:f.get('name').trim(),level:f.get('level'),field:(f.get('fieldx')||'').trim()||f.get('field'),countries:f.getAll('c'),start:f.get('start').trim(),english:f.get('english'),gpa:f.get('gpa').trim(),set:true});buildRoadmap();save();closeAll();render();toast('Feuille de route mise à jour')}}
+
+/* ---------- Feuille de route ---------- */
+function roadmap(){return `<h1>Feuille de route</h1><p class="mut">${goalsLine()}</p>
+ <div class="grid" style="margin-top:18px">${STAGES.map((s,i)=>{const ts=S.roadmap.filter(t=>t.stage===i).sort((a,b)=>a.due.localeCompare(b.due));return `<section class="card"><div class="row"><h2 class="sp">${i+1}. ${esc(s)}</h2><span class="tag">${ts.filter(t=>t.done).length}/${ts.length}</span></div>
+ ${ts.map(t=>`<label class="chk ${t.done?'done':''}"><input type="checkbox" data-tick="${t.id}" ${t.done?'checked':''}><span class="sp">${esc(t.title)} <span class="tiny mut">· ${fmtD(t.due)}</span></span><button class="btn ghost sm icon" data-deltask="${t.id}" aria-label="Supprimer la tâche">${ICS.x}</button></label>`).join('')}
+ <form class="row" data-addtask="${i}" style="margin-top:8px"><input type="text" name="t" placeholder="Ajouter une tâche" style="flex:1"><input type="text" name="d" placeholder="AAAA-MM-JJ" style="width:140px"><button class="btn sm">Ajouter</button></form></section>`}).join('')}</div>
+ <div class="row" style="margin-top:16px"><button class="btn" data-act="onboard">Reconstruire depuis l'objectif</button><button class="btn" data-askt="Planifie ma semaine à partir de ma feuille de route et de mes dates limites">Planifier ma semaine avec le Twin</button></div>`}
+
+/* ---------- Explorer ---------- */
+let F={q:'',c:'',l:'',f:'',src:'',past:false};
+function explore(k){const ttl={position:'Postes',scholarship:'Bourses',professor:'Professeurs'}[k];
+ const base=ALL[k],ql=F.q.toLowerCase();
+ const list=base.filter(o=>(!ql||(o.t+' '+o.u+' '+(o.f||'')+' '+(o.topics||[]).join(' ')).toLowerCase().includes(ql))&&(!F.c||o.c===F.c)&&(!F.l||o.lvl===F.l)&&(!F.f||o.f===F.f)&&(!F.src||o.src===F.src)&&(F.past||!isPast(o))).map(o=>[score(o),o]).sort((a,b)=>b[0]-a[0]||(a[1].dl||'9').localeCompare(b[1].dl||'9')).map(x=>x[1]);
+ const uniq=a=>[...new Set(a.filter(Boolean))].sort();
+ const last=S.scans[0];
+ return `<div class="row"><h1 class="sp">${ttl}</h1><span class="meta">${META?'Actualisé chaque nuit · '+new Date(META.mis_a_jour).toLocaleDateString('fr-FR',{day:'numeric',month:'short'}):''}</span></div>
+ <p class="mut">${k==='professor'?'Professeurs et groupes de recherche qui recrutent dans votre domaine.':k==='scholarship'?'Bourses et financements pour votre niveau et vos pays.':'Doctorats, masters et postdocs repérés chaque nuit sur les plateformes d\'offres et les sites universitaires.'}</p>
+ <div class="row" style="margin:16px 0"><input type="search" id="fq" placeholder="Rechercher" aria-label="Rechercher par sujet ou université" value="${esc(F.q)}" style="flex:2;min-width:200px">
+ <select id="ff" style="flex:1;min-width:170px" aria-label="Domaine"><option value="">Tous domaines</option>${uniq(base.map(o=>o.f)).map(c=>`<option ${F.f===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
+ <select id="fc" style="flex:1;min-width:140px" aria-label="Pays"><option value="">Tous pays</option>${uniq(base.map(o=>o.c)).map(c=>`<option ${F.c===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
+ ${k!=='professor'?`<select id="fl" style="flex:1;min-width:120px" aria-label="Niveau"><option value="">Tous niveaux</option>${['Licence','Master','PhD','Postdoc'].map(l=>`<option ${F.l===l?'selected':''}>${l}</option>`).join('')}</select>`:''}
+ <select id="fs" style="flex:1;min-width:140px" aria-label="Plateforme"><option value="">Toutes plateformes</option>${uniq(base.map(o=>o.src)).map(c=>`<option ${F.src===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
+ <label class="chip"><input type="checkbox" id="fp" ${F.past?'checked':''}> Afficher les clôturées</label></div>
+ <p class="small mut">${list.length} résultat(s) sur ${base.length}, triés par pertinence pour votre profil puis par date limite</p>
+ <div class="grid g2">${list.length?list.slice(0,120).map(o=>k==='professor'?profCard(o):oppCard(k,o)).join(''):`<div class="empty">Aucun résultat ici. Lancez une prospection : Boussole interroge les plateformes pour votre domaine.<br><br><button class="btn pri" data-prospect="${k}">Prospecter</button></div>`}</div>`}
+function profCard(o){const tr=S.tracker.find(x=>x.ref===o.id);return `<article class="card opp"><div class="top"><span class="meta">${esc(o.f||'')} · ${esc(o.src||'')}</span></div><h3><button class="open" data-open="professor:${o.id}">${esc(o.t)}</button></h3><div class="small mut">${esc(o.u)}${o.c?' · '+esc(o.c):''}</div>${(o.topics||[]).length?`<div class="tiny">${o.topics.map(esc).join(' · ')}</div>`:''}
+ <div class="acts"><button class="btn sm ${tr?'saved':''}" data-track="professor:${o.id}" aria-pressed="${tr?'true':'false'}">${ICS.bookmark}${tr?'Suivi':'Suivre'}</button><button class="btn sm ghost" data-gen="email:${o.id}">${ICS.pen}Email</button>${safeUrl(o.url)?`<a class="btn sm ghost" href="${esc(o.url)}" target="_blank" rel="noopener">${ICS.ext}Page</a>`:''}</div></article>`}
+function openItem(k,id){const o=byId(id);if(!o)return;k=o.k;S.history.unshift({k,ref:id,t:Date.now()});S.history=S.history.slice(0,100);logEv('view');save();
+ const tr=S.tracker.find(x=>x.ref===id),dt=o.details;
+ drawer(`<div class="row">${stamp(o)}<span class="meta">${KLAB[k]} · ${esc(o.src||'')}</span><span class="sp"></span><button class="btn ghost sm icon" data-act="close" aria-label="Fermer">${ICS.x}</button></div>
+ <h2 style="margin:12px 0 6px">${esc(o.t)}</h2><p class="mut">${esc(o.u)} · ${esc(o.c)}${o.lvl?' · '+esc(o.lvl):''}</p>
+ ${o.f?`<p><b>Domaine :</b> ${esc(o.f)}</p>`:''}${o.fund?`<p><b>Financement :</b> ${esc(o.fund)}</p>`:''}${o.dl?`<p><b>Date limite :</b> ${fmtD(o.dl)}${isPast(o)?' (clôturée)':''}</p>`:''}
+ ${dt?`<div class="card soft" style="margin-top:16px"><h3>Analyse de l'annonce</h3>${dt.summary?`<p class="small">${esc(dt.summary)}</p>`:''}${dt.requirements?`<p class="small"><b>Prérequis :</b> ${esc(dt.requirements)}</p>`:''}${dt.eligibility?`<p class="small"><b>Éligibilité :</b> ${esc(dt.eligibility)}</p>`:''}${dt.how_to_apply?`<p class="small"><b>Comment postuler :</b> ${esc(dt.how_to_apply)}</p>`:''}${dt.contact?`<p class="small"><b>Contact :</b> ${esc(dt.contact)}</p>`:''}</div>`:''}
+ <div class="row" style="margin-top:16px">${safeUrl(o.url)?`<a class="btn" href="${esc(o.url)}" target="_blank" rel="noopener">${ICS.ext}Ouvrir l'annonce</a>`:''}<button class="btn" data-analyze="${id}">${dt?'Réanalyser':'Analyser l\'annonce'}</button><button class="btn ${tr?'':'pri'}" data-track="${k}:${id}">${tr?'Suivi ✓':'Suivre'}</button></div>
+ <div class="row" style="margin-top:8px"><button class="btn" data-elig="${k}:${id}">Vérifier mon éligibilité</button>${k==='professor'?`<button class="btn" data-gen="email:${id}">Écrire un email</button>`:`<button class="btn" data-gen="sop:${id}">Rédiger la lettre</button>`}<button class="btn ghost" data-hide="${id}">Masquer</button></div>
+ <div class="card soft twinbox" style="margin-top:24px"><h3>Demander au Twin</h3><div id="scopeOut" class="small" style="margin:10px 0;white-space:pre-wrap"></div>
+ <form id="scopeF" class="row"><input type="text" name="q" placeholder="Ai-je le profil, quels documents" style="flex:1"><button class="btn sm pri">Envoyer</button></form></div>`);
+ $('#scopeF').onsubmit=async e=>{e.preventDefault();const q=e.target.q.value.trim();if(!q)return;e.target.q.value='';const out=$('#scopeOut');out.textContent='Réflexion…';
+  const r=await ask(`${ctx()}\nOpportunité concernée : ${JSON.stringify(o)}\nQuestion : ${q}\nRéponds en français, en 120 mots max.`,{onText:t=>out.textContent=t});if(r!=null)out.textContent=r}}
+function track(k,id,status){const o=byId(id);if(!o)return;k=o.k;let t=S.tracker.find(x=>x.ref===id);
+ if(t){if(status)t.status=status;else{S.tracker=S.tracker.filter(x=>x!==t);toast('Retiré du tracker')}}
+ else{S.tracker.unshift({id:uid(),k,ref:id,title:o.t,sub:o.u,status:status||'À faire',note:'',elig:null,pinned:false,added:Date.now()});logEv('save');toast('Ajouté au tracker')}
+ save();return t}
+
+/* ---------- Tracker ---------- */
+let TV={tab:'track',k:'position',sel:null};
+function tracker(){const cut=Date.now()-30*864e5,ev=S.ev.filter(e=>e.t>cut),c=k=>ev.filter(e=>e.k===k).length;
+ const items=TV.tab==='track'?S.tracker.filter(t=>t.k===TV.k).sort((a,b)=>(b.pinned-a.pinned)||b.added-a.added):[];
+ const hist=TV.tab==='hist'?S.history.filter(h=>h.k===TV.k):[];
+ return `<h1>Tracker</h1><p class="mut">Toutes vos candidatures, professeurs et bourses au même endroit.</p>
+ <div class="grid g4" style="margin:18px 0">${[['Consultés',c('view')],['Suivis',c('save')],['Rédigés',c('draft')],['Contactés',c('contact')]].map(([l,n])=>`<div class="card kpi"><span>${l}</span><b>${n}</b><span class="meta">30 derniers jours</span></div>`).join('')}</div>
+ <div class="row" style="margin-bottom:14px"><div class="tabs">${[['track','Suivi'],['hist','Historique']].map(([v,l])=>`<button class="${TV.tab===v?'on':''}" data-tv="tab:${v}">${l}</button>`).join('')}</div>
+ <div class="tabs">${Object.keys(KLAB).map(k=>`<button class="${TV.k===k?'on':''}" data-tv="k:${k}">${KLAB[k]}s</button>`).join('')}</div></div>
+ ${TV.tab==='track'?(items.length?`<table class="stack"><thead><tr><th></th><th>Intitulé</th><th>Établissement</th><th>Échéance</th><th>Statut</th><th></th></tr></thead><tbody>
+ ${items.map(t=>`<tr class="${TV.sel===t.id?'sel':''}"><td><button class="btn ghost sm icon" data-pin="${t.id}" aria-label="${t.pinned?'Désépingler':'Épingler'}" aria-pressed="${t.pinned}"><span class="${t.pinned?'saved':''}">${ICS.star}</span></button></td><td><button class="lnk" style="color:var(--ink);text-align:left" data-tsel="${t.id}">${esc(t.title)}</button></td><td class="small">${esc(t.sub)}</td><td>${stamp(byId(t.ref))||'<span class="tiny">Non précisée</span>'}</td>
+ <td><select data-st="${t.id}" aria-label="Statut">${STATUS.map(s=>`<option ${t.status===s?'selected':''}>${s}</option>`).join('')}</select></td><td><button class="btn sm" data-tsel="${t.id}">Détails</button></td></tr>`).join('')}</tbody></table>`
+ :`<div class="empty">Rien de suivi ici. Utilisez « Suivre » sur une opportunité, ou demandez au Twin.</div>`)
+ :(hist.length?`<div class="list">${hist.slice(0,40).map(h=>{const o=byId(h.ref);return o?`<div class="row card"><span class="sp">${esc(o.t)}<br><span class="tiny mut">${esc(o.u)} · consulté le ${new Date(h.t).toLocaleDateString('fr-FR')}</span></span><button class="btn sm" data-open="${h.k}:${h.ref}">Ouvrir</button></div>`:''}).join('')}</div>`:'<div class="empty">Aucun historique.</div>')}`}
+function trackPanel(id){const t=S.tracker.find(x=>x.id===id);if(!t)return;TV.sel=id;const docs=S.docs.filter(d=>d.ref===t.ref),chats=S.chats.filter(c=>c.scope===t.ref);
+ drawer(`<div class="row"><span class="tag">${KLAB[t.k]}</span><span class="sp"></span><button class="btn ghost sm icon" data-act="close" aria-label="Fermer">${ICS.x}</button></div><h2 style="margin:12px 0 4px">${esc(t.title)}</h2><p class="mut">${esc(t.sub)}</p>
+ <label class="f">Statut<select data-st="${t.id}">${STATUS.map(s=>`<option ${t.status===s?'selected':''}>${s}</option>`).join('')}</select></label>
+ <label class="f" style="margin-top:12px">Note<textarea id="tnote" placeholder="Nom du contact, date limite…">${esc(t.note)}</textarea></label>
+ <div class="eligsec"><h3 style="margin-top:18px">Éligibilité</h3>${t.elig?eligHtml(t.elig):`<p class="small mut">Pas encore vérifiée.</p>`}</div><button class="btn sm" data-elig="${t.k}:${t.ref}">${t.elig?'Revérifier':'Vérifier maintenant'}</button>
+ <h3 style="margin-top:18px">Documents</h3>${docs.length?docs.map(d=>`<div class="row"><span class="sp small">${esc(d.title)}</span><button class="btn sm" data-dopen="${d.id}">Ouvrir</button></div>`).join(''):'<p class="small mut">Aucun document lié.</p>'}
+ <h3 style="margin-top:18px">Échanges avec le Twin</h3>${chats.length?chats.map(c=>`<div class="row"><span class="sp small">${esc(c.title)}</span><button class="btn sm" data-chat="${c.id}">Ouvrir</button></div>`).join(''):'<p class="small mut">Aucun.</p>'}
+ <div class="row" style="margin-top:18px"><button class="btn" data-open="${t.k}:${t.ref}">Fiche complète</button><button class="btn" data-untrack="${t.id}">Retirer</button></div>`);
+ $('#tnote').oninput=e=>{t.note=e.target.value;save()}}
+function eligHtml(e){return `<p class="small"><b>${esc(e.verdict)}</b></p><ul class="small">${(e.items||[]).map(i=>`<li>${i.ok?'<span class="ok">Oui</span>':'<span class="bad">Non</span>'} · ${esc(i.req)}${i.note?' — '+esc(i.note):''}</li>`).join('')}</ul>`}
+async function eligibility(k,id){const o=byId(id);if(!o)return;modal(`<h2>Éligibilité</h2><p class="mut small">${esc(o.t)}</p><div id="eo">Analyse de votre profil…</div>`);
+ const r=await askJson(`${ctx()}\nOpportunité : ${JSON.stringify(o)}\nCompare le profil aux prérequis. Réponds UNIQUEMENT en JSON : {"verdict":"phrase courte en français","items":[{"req":"prérequis","ok":true,"note":"court"}]}`);
+ if(!r){$('#eo').textContent='Indisponible pour le moment.';return}
+ let t=S.tracker.find(x=>x.ref===id)||track(k,id)||S.tracker.find(x=>x.ref===id);if(t)t.elig=r;save();$('#eo').innerHTML=eligHtml(r)+'<p class="note">Vérifiez toujours sur la page officielle.</p><button class="btn" data-act="close">Fermer</button>'}
+
+/* ---------- Documents & générateurs ---------- */
+let DV={f:'Tous',sel:null};
+function documents(){const list=S.docs.filter(d=>DV.f==='Tous'||d.folder===DV.f);
+ return `<div class="row"><h1 class="sp">Documents</h1><button class="btn pri" data-gen="sop">Nouveau document</button></div><p class="mut">CV, lettres, propositions et emails créés avec Boussole.</p>
+ <div class="tabs" style="margin:16px 0">${['Tous',...FOLDERS].map(f=>`<button class="${DV.f===f?'on':''}" data-df="${f}">${f}</button>`).join('')}</div>
+ ${list.length?`<div class="list">${list.map(d=>`<div class="card row"><span class="sp"><b>${esc(d.title)}</b><br><span class="tiny mut">${esc(d.folder)} · ${new Date(d.t).toLocaleDateString('fr-FR')}</span></span><button class="btn sm" data-dopen="${d.id}">Ouvrir</button></div>`).join('')}</div>`:'<div class="empty">Aucun document. Créez-en un avec un générateur.</div>'}
+ <h2 style="margin:28px 0 12px">Générateurs</h2><div class="tools">${GENS.map(g=>`<button class="tool" data-gen="${g.id}"><b>${g.n}</b><span class="tiny mut">${g.d}</span></button>`).join('')}</div>`}
+const GENS=[{id:'sop',n:'Lettre de motivation (SOP)',d:'Statement of purpose sur mesure',folder:'Lettres & SOP'},{id:'email',n:'Email à un professeur',d:'Bâti sur ses articles',folder:'Emails'},{id:'proposal',n:'Proposition de recherche',d:'Problème, méthode, plan',folder:'Propositions'},{id:'cv',n:'CV académique',d:'Format universitaire',folder:'CV'},{id:'cover',n:'Lettre de candidature',d:'Pour un poste précis',folder:'Lettres & SOP'}];
+function tpl(id,o,pts,lang){const en=lang==='Anglais',P=S.profile,who=P.name||(en?'[Your name]':'[Votre nom]'),org=o?o.u||'[Institution]':'[Institution]',ttl=o?o.t:(en?'[Programme / project title]':'[Intitulé du programme ou du projet]'),fld=(en?fieldEn(P.field):P.field)||'[field]',fen=fieldEn(P.field)||'[field]';const pts2=pts?'\n'+pts.split(/\n|;/).map(x=>'- '+x.trim()).filter(x=>x.length>2).join('\n'):'';
+ const T={
+ sop:en?`Statement of purpose — ${ttl}, ${org}\n\n1. Opening (3–4 lines): the question or moment that drew you to ${fld}.\n\n2. Academic background: degree, key courses, grades (${P.gpa||'[GPA]'}), the project you are proudest of and what it taught you.\n\n3. Research experience: methods you master, results you obtained, publications or posters if any.${pts2}\n\n4. Why this programme: 2–3 precise reasons linked to ${org} (a group, a professor, a facility).\n\n5. Plans: what you want to work on and where it leads after the degree.\n\n6. Closing (2 lines).\n\n${who}`:`Lettre de motivation — ${ttl}, ${org}\n\n1. Accroche (3–4 lignes) : la question ou le moment qui vous a amené vers ${fld}.\n\n2. Parcours : diplôme, cours clés, moyenne (${P.gpa||'[moyenne]'}), le projet dont vous êtes le plus fier et ce qu'il vous a appris.\n\n3. Expérience de recherche : méthodes maîtrisées, résultats obtenus, publications ou posters éventuels.${pts2}\n\n4. Pourquoi ce programme : 2 ou 3 raisons précises liées à ${org} (une équipe, un professeur, un équipement).\n\n5. Projet : ce sur quoi vous voulez travailler et la suite après le diplôme.\n\n6. Conclusion (2 lignes).\n\n${who}`,
+ email:`Subject: Prospective ${P.level||'PhD'} student — ${fen}\n\nDear ${o&&o.k==='professor'?o.t:'Professor [Name]'},\n\nI am ${who}, a [Master's student / graduate] in [your degree] at [your university]. I read your recent work on [paper title or topic] and was particularly interested in [one precise point].\n\nMy background: [2 lines — methods, project, result].${pts2}\n\nI am applying for ${P.level||'PhD'} positions starting ${P.start||'[date]'} and would like to ask whether you expect to take on a student${o&&o.k!=='professor'?` for "${ttl}"`:''} in your group. I have attached my CV and transcripts.\n\nThank you for your time.\n\nKind regards,\n${who}`,
+ proposal:en?`Research proposal — ${ttl}\n\n1. Title\n2. Background and problem (½ page): what is known, what is missing.\n3. Research questions (2–3, precise).\n4. Objectives\n5. Methods: data, experiments or models, analysis.\n6. Expected results and impact\n7. Timeline (3 or 4 years, by semester)\n8. References (8–15)${pts2}`:`Proposition de recherche — ${ttl}\n\n1. Titre\n2. Contexte et problème (½ page) : ce qu'on sait, ce qui manque.\n3. Questions de recherche (2 ou 3, précises).\n4. Objectifs\n5. Méthodes : données, expériences ou modèles, analyse.\n6. Résultats attendus et retombées\n7. Calendrier (3 ou 4 ans, par semestre)\n8. Références (8 à 15)${pts2}`,
+ cv:en?`${who}\n[email] · [phone] · [city, country] · [LinkedIn / ORCID]\n\nEducation\n- [Degree], [University], [years] — GPA ${P.gpa||'[x]'}\n\nResearch experience\n- [Project], [lab], [dates]: [what you did, result]\n\nPublications and presentations\n\nSkills\n- Methods / software / languages (English ${P.english||'[test and score]'})\n\nAwards and scholarships\n\nReferences\n- [Name, title, email] ×2${pts2}`:`${who}\n[email] · [téléphone] · [ville, pays] · [LinkedIn / ORCID]\n\nFormation\n- [Diplôme], [Université], [années] — moyenne ${P.gpa||'[x]'}\n\nExpérience de recherche\n- [Projet], [laboratoire], [dates] : [ce que vous avez fait, résultat]\n\nPublications et communications\n\nCompétences\n- Méthodes, logiciels, langues (anglais ${P.english||'[test et score]'})\n\nPrix et bourses\n\nRéférents\n- [Nom, fonction, email] ×2${pts2}`,
+ cover:en?`Dear Selection Committee,\n\nI am applying for "${ttl}" at ${org}. [One sentence on why this project matches you.]\n\n[Paragraph 1 — relevant training and skills.]\n[Paragraph 2 — one concrete achievement linked to the project.]${pts2}\n\nI would welcome the opportunity to discuss my application.\n\nYours sincerely,\n${who}`:`Madame, Monsieur,\n\nJe souhaite candidater à « ${ttl} » à ${org}. [Une phrase sur l'adéquation avec votre profil.]\n\n[Paragraphe 1 — formation et compétences utiles.]\n[Paragraphe 2 — une réalisation concrète liée au projet.]${pts2}\n\nJe me tiens à votre disposition pour un échange.\n\nVeuillez agréer mes salutations distinguées.\n${who}`};
+ return T[id]||T.sop}
+function gen(spec){const [gid,ref]=spec.split(':');const g=GENS.find(x=>x.id===gid)||GENS[0];const o=ref&&byId(ref);
+ modal(`<h2>${g.n}</h2><form id="gf" class="grid" style="margin-top:12px">
+ <label class="f">Type<select name="g">${GENS.map(x=>`<option value="${x.id}" ${x.id===g.id?'selected':''}>${x.n}</option>`).join('')}</select></label>
+ <label class="f">Cible<select name="ref"><option value="">Aucune en particulier</option>${CAT.filter(x=>!isPast(x)).slice(0,200).map(x=>`<option value="${x.id}" ${o&&o.id===x.id?'selected':''}>${esc(x.t)} — ${esc(x.u)}</option>`).join('')}</select></label>
+ <label class="f">Ce que vous voulez mettre en avant<textarea name="pts" placeholder="Expériences, projets, résultats, motivation…"></textarea></label>
+ <label class="f">Langue<select name="lang"><option>Anglais</option><option>Français</option></select></label>
+ <div class="row"><span class="sp"></span><button type="button" class="btn" data-act="close">Annuler</button><button class="btn pri">Créer le modèle</button></div></form><p class="note">Un modèle structuré pré-rempli avec votre profil et l'offre choisie, à compléter puis relire.</p><pre class="doc" id="gout" style="margin-top:16px"></pre>`);
+ $('#gf').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target),gg=GENS.find(x=>x.id===f.get('g')),tg=byId(f.get('ref'));
+  const out=$('#gout');const txt=tpl(gg.id,tg,f.get('pts')||'',f.get('lang'));out.textContent=txt;
+  if(txt==null)return;const d={id:uid(),folder:gg.folder,title:gg.n+(tg?' — '+tg.u:''),body:txt,t:Date.now(),ref:tg?tg.id:null};S.docs.unshift(d);logEv('draft');if(gg.id==='email')logEv('contact');save();
+  out.insertAdjacentHTML('afterend',`<div class="row" style="margin-top:10px"><span class="note sp">Enregistré dans Documents. Relisez avant tout envoi.</span><button class="btn" data-dopen="${d.id}">Ouvrir l'éditeur</button></div>`)}}
+function docOpen(id){const d=S.docs.find(x=>x.id===id);if(!d)return;
+ modal(`<div class="row"><input type="text" id="dt" value="${esc(d.title)}" style="flex:1"><select id="dfo" style="width:170px">${FOLDERS.map(f=>`<option ${d.folder===f?'selected':''}>${f}</option>`).join('')}</select></div>
+ <textarea id="db" style="min-height:340px;margin-top:10px">${esc(d.body)}</textarea>
+ <div class="row" style="margin-top:10px"><button class="btn" id="dcopy">Copier</button><button class="btn" id="ddel">Supprimer</button><span class="sp"></span><button class="btn pri" data-act="close">Fermer</button></div>`);
+ $('#dt').oninput=e=>{d.title=e.target.value;save()};$('#db').oninput=e=>{d.body=e.target.value;save()};$('#dfo').onchange=e=>{d.folder=e.target.value;save()};
+ $('#dcopy').onclick=()=>navigator.clipboard.writeText(d.body).then(()=>toast('Copié'),()=>toast('Copie refusée par le navigateur'));
+ $('#ddel').onclick=()=>{S.docs=S.docs.filter(x=>x!==d);save();closeAll();render();toast('Document supprimé')}}
+
+/* ---------- Alertes ---------- */
+function alerts(){const P=PLANS[S.plan];return `<h1>Alertes d'opportunités</h1><p class="mut">Décrivez ce que vous cherchez avec vos mots : les nouvelles offres correspondantes vous seront signalées.</p>
+ <form id="af" class="card grid" style="margin:18px 0"><label class="f">Ce que je cherche<textarea name="t" placeholder="PhD financé en apprentissage automatique appliqué à l'énergie, Royaume-Uni ou Pays-Bas"></textarea></label>
+ <div class="row"><label class="f" style="width:200px">Fréquence<select name="f"><option>Hebdomadaire</option>${S.plan==='pro'?'<option>Quotidienne</option>':''}</select></label><span class="sp"></span><span class="small mut">${S.alerts.length}/${P.alerts} alerte(s) sur le plan ${P.n}</span><button class="btn pri" ${S.alerts.length>=P.alerts?'disabled':''}>Créer l'alerte</button></div></form>
+ ${S.alerts.length?`<div class="list">${S.alerts.map(a=>{const hits=searchText(a.text).slice(0,3);return `<div class="card"><div class="row"><b class="sp">${esc(a.text)}</b><span class="tag">${esc(a.f)}</span><button class="btn sm" data-runalert="${a.id}">Lancer maintenant</button><button class="btn sm" data-delalert="${a.id}">Supprimer</button></div><p class="small mut" style="margin:8px 0 4px">Correspondances actuelles :</p>${hits.length?hits.map(([k,o])=>`<div class="row small"><span class="sp">${esc(o.t)} — ${esc(o.u)}</span><button class="btn sm" data-open="${k}:${o.id}">Ouvrir</button></div>`).join(''):'<p class="small mut">Aucune pour l\'instant.</p>'}</div>`}).join('')}</div>`:'<div class="empty">Aucune alerte.</div>'}
+ <p class="note" style="margin-top:14px">Les correspondances sont recalculées à chaque mise à jour nocturne du catalogue et s'affichent ici.</p>`}
+function searchText(q){const w=q.toLowerCase().split(/[^a-zà-ÿ0-9]+/).filter(x=>x.length>3);const out=[];for(const o of CAT){const k=o.k;const hay=(o.t+' '+o.u+' '+o.c+' '+o.f+' '+(o.topics||[]).join(' ')+' '+(o.lvl||'')).toLowerCase();const s=w.filter(x=>hay.includes(x)).length;if(s)out.push([s,k,o])}return out.sort((a,b)=>b[0]-a[0]).map(x=>[x[1],x[2]])}
+
+/* ---------- Plans ---------- */
+function plans(){const L=[['free','Gratuit','0 €',['Offres des sites universitaires','10 profils de professeurs / mois','5 crédits Twin / jour (60 / mois)','Réflexion jusqu\'à Équilibré','1 alerte hebdomadaire']],['premium','Premium','—',['Tout le plan Gratuit','Offres repérées sur les réseaux sociaux','10 crédits Twin / jour sans plafond mensuel','Réflexion jusqu\'à Équilibré','Recharge de crédits possible']],['pro','Pro','—',['Toutes les offres','Profils de professeurs illimités','800 crédits Twin / mois sans plafond quotidien','Réflexion jusqu\'à Max','3 alertes, quotidiennes ou hebdo']]];
+ return `<h1>Plans</h1><p class="mut">Chaque outil du Twin fonctionne sur tous les plans ; ils diffèrent par les offres accessibles et les crédits.</p>
+ <div class="grid g3 plans" style="margin-top:18px">${L.map(([id,n,p,f])=>`<div class="card ${S.plan===id?'soft':''}"><h2>${n}</h2><div class="price">${p}</div><ul>${f.map(x=>`<li>${x}</li>`).join('')}</ul><button class="btn ${S.plan===id?'':'pri'}" data-plan="${id}" ${S.plan===id?'disabled':''}>${S.plan===id?'Plan actuel':'Choisir'}</button></div>`).join('')}</div>
+ <div class="card soft" style="margin-top:16px"><b>Crédits restants aujourd'hui : ${credits()}</b><p class="small mut">Les limites quotidiennes se réinitialisent à minuit, les mensuelles le 1er. Rechercher et consulter ne coûte rien.</p></div>
+ <p class="note">Démo : le changement de plan est immédiat et sans paiement. Branchez votre prestataire de paiement pour la mise en production.</p>`}
+
+/* ---------- Prospection en direct (connecteur Firecrawl) ---------- */
+let mcp=null;
+async function getMcp(){if(mcp)return mcp;try{mcp=await claude.use('mcp')}catch(e){}return mcp}
+function hits(p){const out=[];const walk=(x,d)=>{if(x==null||d>8)return;if(typeof x==='string'){if(/^\s*[\[{]/.test(x)){try{walk(JSON.parse(x),d+1)}catch(e){}}return}if(Array.isArray(x)){x.forEach(y=>walk(y,d+1));return}if(typeof x==='object'){if(typeof x.url==='string'&&/^https:\/\//.test(x.url)&&(x.title||x.description)){out.push({title:String(x.title||'').slice(0,200),url:x.url,desc:String(x.description||x.snippet||'').replace(/\s+/g,' ').slice(0,350)})}else Object.values(x).forEach(y=>walk(y,d+1))}};walk(p,0);return out}
+async function fcSearch(q,fresh){const m=await getMcp();if(!m)throw{code:'no_mcp'};const r=await m.callTool('Firecrawl','firecrawl_search',{query:q,objective:'Find current funded PhD, master, postdoc positions and scholarships for a student applying abroad',limit:10,sources:['web'],domainTools:false,...(fresh?{tbs:fresh}:{})});return hits(r&&('payload' in r)?r.payload:r)}
+function buildQuery(o,pl){const fe=fieldEn(o.field),cs=(o.countries||[]).slice(0,3).map(c=>CEN[c]||c),geo=cs.length?'('+cs.join(' OR ')+')':'';
+ const lvl={Licence:'bachelor',Master:'master',PhD:'PhD',Postdoc:'postdoc'}[o.lvl]||'PhD';
+ let q=o.k==='scholarship'?`${lvl} scholarship ${fe} ${geo} 2027`:o.k==='professor'?`professor ${fe} research group "PhD students" recruiting ${geo}`:(lvl==='postdoc'?`postdoctoral position ${fe} ${geo}`:lvl==='master'?`master ${fe} funded ${geo}`:`funded ${lvl} position ${fe} ${geo}`);
+ if(o.kw)q=o.kw+' '+q;
+ if(pl.id==='adum'||pl.id==='abg')q=(o.k==='scholarship'?'bourse ':'offre de thèse financée ')+(o.field||'')+' '+(o.kw||'');
+ if(pl.id==='linkedin')q+=' fully funded';
+ if(pl.id==='x')q='"'+(o.k==='scholarship'?'scholarship':o.k==='professor'?'PhD students':'fully funded '+lvl)+'" '+fe+(o.kw?' '+o.kw:'');
+ if(pl.id==='unis')q+=' site:.edu OR site:.ac.uk OR site:.edu.au OR site:.de OR site:.fr OR site:.nl -site:findaphd.com';
+ else if(pl.site)q+=' site:'+pl.site;
+ return q.replace(/\s+/g,' ').trim()}
+const KW_OK=/ph\.?d|doctor|doctoral|thèse|these|scholarship|bourse|fellowship|studentship|postdoc|master|msc|funded|financ|recruit|position|professor|lab|group/i;
+async function normalize(raw,o){const s=await getSample();
+ if(!s||credits()<1){return raw.filter(h=>KW_OK.test(h.title+' '+h.desc)).map(h=>({t:h.title.replace(/\s*[|\-–]\s*(LinkedIn|X|Twitter).*$/i,''),u:'',c:'',lvl:o.lvl||'',f:o.field||'',fund:'',dl:'',url:h.url,src:h.src,k:o.k}))}
+ const out=[];for(let i=0;i<raw.length;i+=30){const chunk=raw.slice(i,i+30);
+  const prompt=`Tu tries des résultats de recherche pour un étudiant qui cherche : ${KLAB[o.k]} · niveau ${o.lvl||'?'} · domaine ${o.field||'?'} · pays ${(o.countries||[]).join(', ')||'tous'} · mots-clés ${o.kw||'aucun'}. Aujourd'hui : ${today()}.
+Résultats : ${JSON.stringify(chunk.map((h,j)=>({i:j,title:h.title,url:h.url,desc:h.desc})))}
+Pour CHAQUE résultat renvoie un objet. keep=true seulement si c'est une offre/annonce réelle (poste de doctorat, master, postdoc, bourse, ou page d'un professeur/groupe qui recrute) correspondant à la recherche et pas clairement expirée ; false pour actualités, pages hors sujet, publicités, pages génériques sans offre.
+Réponds UNIQUEMENT en JSON : [{"i":0,"keep":true,"t":"intitulé court en langue d'origine","u":"établissement","c":"pays en français","lvl":"Licence|Master|PhD|Postdoc","f":"un domaine parmi ${Object.keys(FEN).join(' | ')}","fund":"financement en français court ou vide","dl":"AAAA-MM-JJ ou vide","topics":["thèmes si professeur"]}]. N'invente rien : laisse vide ce qui n'est pas dans le texte.`;
+  try{const r=await s.json(prompt,{modelTier:'quick'});spend(1);(Array.isArray(r)?r:(r&&r.items)||[]).forEach(x=>{const h=chunk[x.i];if(h&&x.keep)out.push({t:String(x.t||h.title).slice(0,220),u:String(x.u||''),c:String(x.c||''),lvl:String(x.lvl||''),f:FEN[x.f]?x.f:(o.field||'Pluridisciplinaire'),fund:String(x.fund||''),dl:/^\d{4}-\d\d-\d\d$/.test(x.dl||'')?x.dl:'',topics:Array.isArray(x.topics)?x.topics.slice(0,5).map(String):undefined,url:h.url,src:h.src,k:o.k})})}
+  catch(e){chunk.filter(h=>KW_OK.test(h.title+' '+h.desc)).forEach(h=>out.push({t:h.title,u:'',c:'',lvl:o.lvl||'',f:o.field||'',fund:'',dl:'',url:h.url,src:h.src,k:o.k}))}}
+ return out}
+let scanning=false;
+async function prospect(o,log){if(scanning){log('Une prospection est déjà en cours.');return[]}scanning=true;const raw=[],known=new Set(CAT.map(x=>x.url).concat(S.found.map(x=>x.url)));
+ try{const m=await getMcp();if(!m){log('Le connecteur Firecrawl n\'est pas disponible dans cette vue. Ouvrez la page dans Claude et autorisez Firecrawl.');return[]}
+ for(const id of o.plats){const pl=PLATFORMS.find(p=>p.id===id);if(!pl)continue;const q=buildQuery(o,pl);log(pl.n+' · recherche');
+  try{const h=await fcSearch(q,o.fresh);let n=0;h.forEach(x=>{if(!known.has(x.url)){known.add(x.url);raw.push({...x,src:pl.n});n++}});log(pl.n+' · '+h.length+' résultat(s), '+n+' nouveau(x)')}
+  catch(e){log(pl.n+' · échec : '+(e&&e.code==='not_granted'?'accès au connecteur refusé':(e&&(e.message||e.code))||'erreur'));if(e&&e.code==='not_granted')break}}
+ if(!raw.length){log('Aucun nouveau résultat.');S.scans.unshift({t:Date.now(),n:0});S.scans=S.scans.slice(0,20);save();return[]}
+ log('Tri et extraction des offres ('+raw.length+' résultats)…');
+ const offers=(await normalize(raw,o)).map(x=>({...x,id:'f'+uid(),found:today()}));
+ S.found=offers.concat(S.found).slice(0,450);rebuildCat();S.scans.unshift({t:Date.now(),n:offers.length,q:o});S.scans=S.scans.slice(0,20);save();
+ log('Terminé : '+offers.length+' offre(s) ajoutée(s) au catalogue.');return offers}
+ finally{scanning=false}}
+function prospectModal(k,kw){const p=S.profile;
+ modal(`<h2>Prospecter les plateformes</h2><p class="mut small">Boussole interroge chaque plateforme avec votre recherche, garde les vraies offres et les ajoute au catalogue. Utilise votre connecteur Firecrawl.</p>
+ <form id="pf" class="grid" style="margin-top:12px">
+ <div class="tabs">${Object.keys(KLAB).map(x=>`<label><input type="radio" name="k" value="${x}" ${x===k?'checked':''}> ${KLAB[x]}s</label>`).join('')}</div>
+ <div class="grid g2"><label class="f">Domaine<select name="field">${fieldOptions(FEN[p.field]?p.field:'')}</select></label>
+ <label class="f">Niveau<select name="lvl">${['PhD','Master','Postdoc','Licence'].map(l=>`<option ${p.level===l?'selected':''}>${l}</option>`).join('')}</select></label></div>
+ <label class="f">Mots-clés (sujet précis, méthode, sport…)<input type="text" name="kw" value="${esc(kw||(!FEN[p.field]?p.field:''))}" placeholder="Ex. : football, fatigue neuromusculaire"></label>
+ <fieldset class="card" style="padding:12px;max-height:150px;overflow:auto"><legend class="small">Pays (3 max utilisés par requête)</legend><div class="row">${COUNTRIES.map(c=>`<label class="chip"><input type="checkbox" name="c" value="${c}" ${p.countries.includes(c)?'checked':''}>${c}</label>`).join('')}</div></fieldset>
+ <label class="f" style="max-width:260px">Publiées depuis<select name="fresh"><option value="qdr:w">1 semaine</option><option value="qdr:m" selected>1 mois</option><option value="qdr:y">1 an</option><option value="">Toutes dates</option></select></label>
+ <fieldset class="card" style="padding:12px"><legend class="small">Plateformes</legend><div class="row" id="plats"></div></fieldset>
+ <div class="row"><span class="small mut sp">Chaque plateforme coûte une recherche Firecrawl ; le tri utilise environ 1 crédit Twin par 30 résultats.</span><button type="button" class="btn" data-act="close">Fermer</button><button class="btn pri" id="pgo">Lancer la prospection</button></div></form>
+ <ol id="plog" class="small" style="margin:14px 0 0;padding-left:20px"></ol>`);
+ const f=$('#pf'),drawPl=()=>{const kk=f.querySelector('[name=k]:checked').value;$('#plats').innerHTML=PLATFORMS.filter(x=>x.k.includes(kk)).map(x=>`<label class="chip"><input type="checkbox" name="pl" value="${x.id}" ${x.on?'checked':''}>${esc(x.n)}</label>`).join('')};
+ drawPl();f.querySelectorAll('[name=k]').forEach(r=>r.onchange=drawPl);
+ f.onsubmit=async e=>{e.preventDefault();const fd=new FormData(f),plats=fd.getAll('pl');if(!plats.length){toast('Choisissez au moins une plateforme');return}
+  const lg=$('#plog');lg.innerHTML='';const log=m=>{const li=document.createElement('li');li.textContent=m;lg.appendChild(li)};$('#pgo').disabled=true;
+  const res=await prospect({k:fd.get('k'),field:fd.get('field'),lvl:fd.get('lvl'),kw:fd.get('kw').trim(),countries:fd.getAll('c'),fresh:fd.get('fresh'),plats},log);
+  $('#pgo').disabled=false;if(res.length){const kk=fd.get('k');log('Résultats visibles dans '+({position:'Postes',scholarship:'Bourses',professor:'Professeurs'}[kk])+'.');F={q:'',c:'',l:'',f:'',src:'',past:false};const h={position:'positions',scholarship:'scholarships',professor:'professors'}[kk];if(location.hash==='#'+h)render();else{const b=document.createElement('button');b.className='btn pri';b.textContent='Voir les offres';b.onclick=()=>{closeAll();location.hash=h};lg.appendChild(b)}}}}
+async function analyze(id){const o=byId(id);if(!o||!safeUrl(o.url))return;const m=await getMcp();if(!m){toast('Connecteur Firecrawl indisponible');return}toast('Lecture de l\'annonce…');
+ try{const r=await m.callTool('Firecrawl','firecrawl_scrape',{url:o.url,objective:'Read a PhD/scholarship offer to check deadline, funding and eligibility for a student',formats:['query'],queryOptions:{prompt:'Return ONLY JSON in French: {"summary":"2 phrases","funding":"","deadline":"YYYY-MM-DD or empty","requirements":"","eligibility":"nationalités/conditions","how_to_apply":"","contact":"","institution":"","country":"pays en français"}. Leave empty what the page does not say.'}});
+  const p=r&&('payload' in r)?r.payload:r;let ans=null;const find=x=>{if(ans||x==null)return;if(typeof x==='string'){const mm=x.match(/\{[\s\S]*\}/);if(mm){try{const j=JSON.parse(mm[0]);if(j.summary!==undefined||j.deadline!==undefined)ans=j;else find(j)}catch(e){}}return}if(typeof x==='object'){if(x.answer)find(x.answer);Object.values(x).forEach(find)}};find(p);
+  if(!ans){toast('Annonce illisible (page protégée ou supprimée)');return}
+  let f=S.found.find(x=>x.id===id);if(!f){f={...o};S.found.unshift(f)}f.details=ans;if(/^\d{4}-\d\d-\d\d$/.test(ans.deadline||''))f.dl=ans.deadline;if(ans.funding)f.fund=String(ans.funding).slice(0,140);if(!f.u&&ans.institution)f.u=String(ans.institution);if(!f.c&&ans.country)f.c=String(ans.country);
+  rebuildCat();save();openItem(f.k,id);render()}catch(e){toast('Lecture impossible : '+((e&&(e.message||e.code))||'erreur'))}}
+
+/* ---------- Twin (IA) ---------- */
+let sample=null,cur=null,abort=null,busy=false;
+function ctx(){const p=S.profile;return `Tu es "Twin", l'assistant de candidature de Boussole (études à l'étranger, Licence→Postdoc). Profil : ${JSON.stringify({prenom:p.name,niveau:p.level,domaine:p.field,pays:p.countries,rentree:p.start,anglais:p.english,moyenne:p.gpa})}.
+Étape actuelle : ${STAGES[curStage()]}. Tâches ouvertes : ${JSON.stringify(S.roadmap.filter(t=>!t.done).slice(0,12).map(t=>({id:t.id,t:t.title,due:t.due})))}.
+Tracker : ${JSON.stringify(S.tracker.slice(0,20).map(t=>({id:t.ref,titre:t.title,statut:t.status,note:t.note})))}.
+Offres réelles les plus pertinentes (${CAT.length} au total, prospectées sur ${[...new Set(CAT.map(o=>o.src))].join(', ')}) : ${JSON.stringify(CAT.filter(o=>!isPast(o)).map(o=>[score(o),o]).sort((a,b)=>b[0]-a[0]).slice(0,35).map(([,o])=>({id:o.id,type:o.k,t:o.t,u:o.u,c:o.c,lvl:o.lvl,domaine:o.f,financement:o.fund,dl:o.dl,source:o.src})))}.
+Pour chercher de nouvelles offres sur les plateformes (FindAPhD, EURAXESS, LinkedIn, X, ScholarshipDb, sites universitaires…), utilise l'outil prospecter.
+Règles : réponds dans la langue de l'utilisateur ; emails aux professeurs en anglais ; n'invente aucun fait sur l'utilisateur ; rappelle de vérifier les dates sur les pages officielles.`}
+const tierOf=()=>['quick','quick','default','complex','complex'][S.think];
+async function getSample(){if(sample)return sample;try{sample=await claude.use('sample')}catch(e){}return sample}
+async function ask(prompt,o={}){const s=await getSample();if(!s){toast('Assistant IA indisponible dans cette vue');return null}
+ const c=cost(typeof prompt==='string'?prompt.slice(-800):'');if(credits()<c){toast('Crédits insuffisants — voir Plans');return null}
+ try{const r=await s(prompt,{onText:o.onText?({text})=>o.onText(text):undefined,modelTier:o.tier||tierOf(),signal:o.signal,tools:o.tools,cache:false});spend(c);save();side(view);return r.text}
+ catch(e){if(e&&e.code==='rate_limited')toast('Trop de demandes, réessayez dans un instant');else if(e&&e.name!=='AbortError'&&e.code!=='aborted')toast('Réponse impossible : '+(e.message||'erreur'));return e&&e.text?e.text:null}}
+async function askJson(prompt){const s=await getSample();if(!s){toast('Assistant IA indisponible');return null}if(credits()<1){toast('Crédits insuffisants');return null}
+ try{const r=await s.json(prompt,{modelTier:'default'});spend(1);save();return r}catch(e){toast('Analyse impossible');return null}}
+const TOOLS=()=>[
+ {name:'suivre_opportunite',description:'Ajoute une opportunité (par son id) au tracker avec un statut.',inputSchema:{type:'object',properties:{id:{type:'string'},statut:{type:'string',enum:STATUS}},required:['id']},execute:({id,statut})=>{const o=byId(id);if(!o)throw new Error('id inconnu');const k=o.k;const ex=S.tracker.find(x=>x.ref===id);if(ex){ex.status=statut||ex.status}else track(k,id,statut||'À faire');note('Ajouté au tracker : '+id);return{ok:true}}},
+ {name:'ajouter_tache',description:'Ajoute une tâche à la feuille de route. etape: 0 Où postuler,1 Anglais,2 Documents,3 Candidature,4 Visa.',inputSchema:{type:'object',properties:{titre:{type:'string'},etape:{type:'integer'},date:{type:'string',description:'AAAA-MM-JJ'}},required:['titre','etape']},execute:({titre,etape,date})=>{S.roadmap.push({id:uid(),stage:Math.max(0,Math.min(4,etape|0)),title:titre,due:/^\d{4}-\d\d-\d\d$/.test(date||'')?date:addDays(7),done:false,custom:true});note('Tâche ajoutée : '+titre);save();return{ok:true}}},
+ {name:'terminer_tache',description:'Marque une tâche de la feuille de route comme faite (par id).',inputSchema:{type:'object',properties:{id:{type:'string'}},required:['id']},execute:({id})=>{const t=S.roadmap.find(x=>x.id===id);if(!t)throw new Error('tâche inconnue');t.done=true;note('Tâche terminée : '+t.title);save();return{ok:true}}},
+ {name:'enregistrer_document',description:'Enregistre un texte rédigé dans Documents.',inputSchema:{type:'object',properties:{titre:{type:'string'},dossier:{type:'string',enum:FOLDERS},texte:{type:'string'}},required:['titre','texte']},execute:({titre,dossier,texte})=>{S.docs.unshift({id:uid(),folder:FOLDERS.includes(dossier)?dossier:'Autres',title:titre,body:texte,t:Date.now(),ref:cur&&cur.scope||null});logEv('draft');note('Document enregistré : '+titre);save();return{ok:true}}},
+ {name:'prospecter',description:'Lance une prospection en direct sur les plateformes (FindAPhD, EURAXESS, Academic Positions, LinkedIn, X, ScholarshipDb, Mastersportal, sites universitaires…) et ajoute les nouvelles offres au catalogue. Renvoie les offres trouvées avec leurs id.',inputSchema:{type:'object',properties:{type:{type:'string',enum:['position','scholarship','professor']},domaine:{type:'string'},niveau:{type:'string',enum:['Licence','Master','PhD','Postdoc']},pays:{type:'array',items:{type:'string'}},motscles:{type:'string'}},required:['type']},execute:async a=>{note('Prospection en cours…');const r=await prospect({k:a.type,field:a.domaine||S.profile.field,lvl:a.niveau||S.profile.level,countries:a.pays||S.profile.countries,kw:a.motscles||'',fresh:'qdr:m',plats:PLATFORMS.filter(p=>p.on&&p.k.includes(a.type)).map(p=>p.id)},m=>note(m));return{nouvelles:r.length,offres:r.slice(0,15).map(o=>({id:o.id,t:o.t,u:o.u,c:o.c,dl:o.dl,source:o.src}))}}},
+ {name:'creer_alerte',description:'Crée une alerte d\'opportunités (après accord de l\'utilisateur).',inputSchema:{type:'object',properties:{texte:{type:'string'}},required:['texte']},execute:({texte})=>{if(S.alerts.length>=PLANS[S.plan].alerts)throw new Error('limite d\'alertes du plan atteinte');S.alerts.push({id:uid(),text:texte,f:'Hebdomadaire',t:Date.now()});note('Alerte créée');save();return{ok:true}}}];
+function note(t){if(cur){cur.msgs.push({r:'act',c:t});paintMsgs()}}
+function newChat(scope){cur={id:uid(),title:'Nouvelle conversation',pinned:false,t:Date.now(),msgs:[],scope:scope||null};return cur}
+const TWT=[['Où postuler','Propose-moi une liste de 6 cibles (universités, programmes ou professeurs) adaptées à mon profil, avec pourquoi.'],['Vérifier l\'éligibilité','Pour les opportunités de mon tracker, dis-moi lesquelles correspondent à mon profil et ce qui manque.'],['Rédiger un document','Aide-moi à rédiger ma lettre de motivation. Pose-moi d\'abord 3 questions.'],['Prospecter des offres','Lance une prospection des postes financés dans mon domaine et mes pays, puis présente-moi les 5 meilleures.'],['Trouver des professeurs','Prospecte des professeurs qui recrutent des doctorants sur mon sujet, puis classe-les.'],['Idées de recherche','Donne-moi 3 pistes de recherche actuelles dans mon domaine, avec une question de recherche chacune.'],['Planifier ma semaine','Planifie ma semaine à partir de ma feuille de route et de mes dates limites.'],['Simulation d\'entretien','Fais-moi passer un entretien d\'admission : une question à la fois, puis un retour sur ma réponse.'],['Mettre à jour ma feuille de route','Voici ce qui a changé : ']];
+let chatQ='';
+function twin(){if(!cur)newChat();const P=PLANS[S.plan],cr=credits(),max=Math.min(P.day,P.month);
+ const list=S.chats.filter(c=>!chatQ||c.title.toLowerCase().includes(chatQ.toLowerCase())).sort((a,b)=>(b.pinned-a.pinned)||b.t-a.t);
+ return `<div class="twin"><div class="chats"><button class="btn" data-act="newchat">${ICS.plus}Nouvelle conversation</button><input type="search" id="cq" placeholder="Rechercher" aria-label="Rechercher une conversation" value="${esc(chatQ)}" style="margin:8px 0">
+ ${list.map(c=>`<div class="it ${cur&&cur.id===c.id?'on':''}"><button class="t" data-chat="${c.id}">${esc(c.title)}</button><button class="btn ghost sm icon" data-cpin="${c.id}" aria-label="${c.pinned?'Désépingler':'Épingler'}"><span class="${c.pinned?'saved':''}">${ICS.star}</span></button><button class="btn ghost sm icon" data-cdel="${c.id}" aria-label="Supprimer">${ICS.x}</button></div>`).join('')||'<p class="tiny mut">Aucune conversation.</p>'}</div>
+ <div class="conv"><div class="msgs" id="msgs"></div>
+ <form class="composer" id="cf"><textarea id="ci" placeholder="Demander au Twin" aria-label="Message"></textarea>
+ <div class="row"><label class="btn ghost sm fileb" title="Fichiers texte, CSV, Markdown ou JSON">${ICS.clip}<span id="fcount">Joindre</span><input type="file" id="cfile" multiple accept=".txt,.csv,.md,.json"></label>
+ <label class="chip" style="border:0">Réflexion <select id="think" style="height:32px;padding:0 8px;width:auto;font-size:13px">${THINK.map((t,i)=>`<option value="${i}" ${S.think===i?'selected':''} ${i>P.think?'disabled':''}>${t}${i>P.think?' (Pro)':''}</option>`).join('')}</select></label>
+ <span class="chip" title="Crédits Twin restants aujourd'hui"><span class="gauge"><i style="width:${Math.min(100,cr/(max>100?800:max)*100)}%"></i></span><span class="meta">${cr} crédits</span></span><span class="sp"></span>
+ <button type="button" class="btn sm" id="cstop" ${busy?'':'hidden'}>Stop</button><button class="btn pri sm" ${busy?'disabled':''}>${ICS.send}Envoyer</button></div></form>
+ <p class="note">Réponses issues de votre catalogue d'offres réelles et du modèle : vérifiez les exigences sur les pages officielles. Vous restez l'auteur de vos documents.</p></div></div>`}
+function paintMsgs(){const m=$('#msgs');if(!m||!cur)return;
+ if(!cur.msgs.length){m.innerHTML=`<h2>Que voulez-vous faire ?</h2><div class="tools">${TWT.map(([n,p],i)=>`<button class="tool" data-twt="${i}"><b>${n}</b><span class="tiny mut">${esc(p.slice(0,60))}…</span></button>`).join('')}</div>`;return}
+ m.innerHTML=cur.msgs.map((x,i)=>`<div class="m ${x.r==='user'?'u':x.r==='act'?'act':'a'}" ${i===cur.msgs.length-1?'id="last"':''}></div>`).join('')+(cur.err?`<button class="btn sm" data-act="retry">Réessayer</button>`:'');
+ [...m.children].forEach((el,i)=>{if(cur.msgs[i])el.textContent=cur.msgs[i].c});m.scrollTop=m.scrollHeight}
+async function send(text,files){if(busy||!text.trim())return;
+ if(!S.chats.includes(cur)){S.chats.unshift(cur)}
+ let att='';for(const f of files||[]){if(f.size>10e6){toast(f.name+' dépasse 10 Mo');continue}try{att+=`\n[Fichier ${f.name}]\n`+(await f.text()).slice(0,20000)}catch(e){}}
+ cur.msgs.push({r:'user',c:text+(att?`\n(${files.length} fichier(s) joint(s))`:'')});if(cur.title==='Nouvelle conversation')cur.title=text.slice(0,48);cur.t=Date.now();cur.err=false;
+ cur.msgs.push({r:'assistant',c:'Réflexion…'});busy=true;paint();save();
+ const hist=cur.msgs.filter(x=>x.r!=='act').slice(0,-1).slice(-16).map(x=>({role:x.r==='user'?'user':'assistant',content:x.c}));
+ hist[0]={role:'user',content:ctx()+'\n\n'+hist[0].content};hist[hist.length-1].content+=att;
+ abort=new AbortController();const slot=cur.msgs[cur.msgs.length-1],chat=cur;
+ const r=await ask(hist,{signal:abort.signal,tools:TOOLS(),onText:t=>{slot.c=t;const l=$('#last');if(l&&chat===cur){l.textContent=t;$('#msgs').scrollTop=1e9}}});
+ busy=false;if(r==null){if(slot.c==='Réflexion…'){chat.msgs.pop();chat.err=true}}else slot.c=r;
+ if(/postul|appl/i.test(text)&&/j'ai|i have/i.test(text))chat.msgs.push({r:'act',c:'Avez-vous postulé ? Dites « oui, ajoute au tracker » pour l\'enregistrer comme Candidature envoyée.'});
+ save();if(view==='twin')paint()}
+function paint(){$('#main').innerHTML=twin();paintMsgs();bindTwin()}
+function bindTwin(){const f=$('#cf');if(!f)return;const ci=$('#ci');
+ f.onsubmit=e=>{e.preventDefault();const v=ci.value;const fl=[...$('#cfile').files].slice(0,5);ci.value='';send(v,fl)};
+ ci.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();f.requestSubmit()}};
+ $('#cfile').onchange=e=>{const n=e.target.files.length;$('#fcount').textContent=n?n+' fichier(s)':'Joindre'};$('#think').onchange=e=>{S.think=+e.target.value;save()};$('#cstop').onclick=()=>abort&&abort.abort();
+ $('#cq').oninput=e=>{chatQ=e.target.value;const p=e.target.selectionStart;paint();const q=$('#cq');q.focus();q.setSelectionRange(p,p)}}
+
+/* ---------- Routage & événements ---------- */
+let view='home';
+function render(){view=(location.hash||'#home').slice(1);if(!NAV.some(n=>n&&n[0]===view))view='home';side(view);
+ if(view==='twin'){paint();return}
+ const m=$('#main');m.innerHTML={home,roadmap,tracker,documents,alerts,plans,positions:()=>explore('position'),scholarships:()=>explore('scholarship'),professors:()=>explore('professor')}[view]();
+ const fq=$('#fq');if(fq){const k={positions:'position',scholarships:'scholarship',professors:'professor'}[view];
+  fq.oninput=e=>{F.q=e.target.value;const p=e.target.selectionStart;render();const n=$('#fq');n.focus();n.setSelectionRange(p,p)};$('#fc').onchange=e=>{F.c=e.target.value;render()};$('#ff').onchange=e=>{F.f=e.target.value;render()};$('#fs').onchange=e=>{F.src=e.target.value;render()};$('#fp').onchange=e=>{F.past=e.target.checked;render()};const fl=$('#fl');if(fl)fl.onchange=e=>{F.l=e.target.value;render()}}
+ const af=$('#af');if(af)af.onsubmit=e=>{e.preventDefault();const t=e.target.t.value.trim();if(!t)return;S.alerts.push({id:uid(),text:t,f:e.target.f.value,t:Date.now()});save();render();toast('Alerte créée')};
+ document.querySelectorAll('[data-addtask]').forEach(fm=>fm.onsubmit=e=>{e.preventDefault();const t=fm.t.value.trim();if(!t)return;S.roadmap.push({id:uid(),stage:+fm.dataset.addtask,title:t,due:/^\d{4}-\d\d-\d\d$/.test(fm.d.value)?fm.d.value:addDays(7),done:false,custom:true});save();render()})}
+$('#side').addEventListener('click',e=>{const a=e.target.closest('a[href="#twin"]');if(a){cur=null;if(location.hash==='#twin')paint()}});
+window.addEventListener('hashchange',()=>{closeAll();render();$('#main').focus({preventScroll:true});scrollTo(0,0)});
+document.addEventListener('change',e=>{const t=e.target,d=t.dataset;
+ if(d.tick){const x=S.roadmap.find(r=>r.id===d.tick);if(x){x.done=t.checked;save();setTimeout(render,250)}}
+ if(d.st){const x=S.tracker.find(r=>r.id===d.st);if(x){x.status=t.value;if(/email/i.test(t.value))logEv('contact');save();toast('Statut : '+t.value)}}});
+document.addEventListener('click',e=>{const b=e.target.closest('button,[data-go]');if(!b)return;const d=b.dataset,[k,id]=(d.open||d.track||d.ask||d.elig||'').split(':');
+ if(d.act==='close')closeAll();
+ else if(d.act==='onboard')onboarding();
+ else if(d.act==='newchat'){newChat();paint()}
+ else if(d.act==='retry'&&cur){const u=[...cur.msgs].reverse().find(m=>m.r==='user');if(u){cur.msgs.splice(cur.msgs.lastIndexOf(u),1);send(u.c,[])}}
+ else if(d.act==='mentor'||d.act==='delegate')modal(`<h2>${d.act==='mentor'?'Avis d\'un mentor':'Déléguer la candidature'}</h2><p class="mut">${d.act==='mentor'?'Décrivez votre besoin ; votre demande sera conservée ici pour être transmise à un mentor.':'Décrivez vos cibles et votre calendrier ; la demande est conservée ici.'}</p><form id="mf" class="grid"><textarea name="t" placeholder="Mon besoin…"></textarea><div class="row"><span class="sp"></span><button type="button" class="btn" data-act="close">Annuler</button><button class="btn pri">Enregistrer la demande</button></div></form><p class="note">Aucun service de mise en relation n'est branché dans cette version : rien n'est envoyé.</p>`),$('#mf').onsubmit=ev=>{ev.preventDefault();S.mentor.push({k:d.act,t:ev.target.t.value,at:Date.now()});save();closeAll();toast('Demande enregistrée')};
+ else if(d.go)location.hash=d.go;
+ else if(d.open)openItem(k,id);
+ else if(d.track){track(k,id);if($('#drawer').classList.contains('on'))openItem(k,id);render()}
+ else if(d.prospect)prospectModal(d.prospect);
+ else if(d.analyze)analyze(d.analyze);
+ else if(d.hide){S.hidden.push(d.hide);rebuildCat();save();closeAll();render();toast('Offre masquée')}
+ else if(d.runalert){const a=S.alerts.find(x=>x.id===d.runalert);if(a)prospectModal('position',a.text)}
+ else if(d.ask){const o=byId(id);newChat(id);location.hash='twin';if(view==='twin')paint();setTimeout(()=>send(`À propos de « ${o.t} » (${o.u}) : suis-je éligible et quels documents dois-je préparer ?`,[]),50)}
+ else if(d.askt){newChat();if(location.hash==='#twin')paint();else location.hash='twin';setTimeout(()=>send(d.askt,[]),50)}
+ else if(d.elig)eligibility(k,id);
+ else if(d.done){const x=S.roadmap.find(r=>r.id===d.done);if(x){x.done=true;save();render();toast('Étape terminée')}}
+ else if(d.deltask){S.roadmap=S.roadmap.filter(r=>r.id!==d.deltask);save();render()}
+ else if(d.gen)gen(d.gen);
+ else if(d.dopen)docOpen(d.dopen);
+ else if(d.df){DV.f=d.df;render()}
+ else if(d.tv){const [a,v]=d.tv.split(':');TV[a]=v;render()}
+ else if(d.tsel)trackPanel(d.tsel);
+ else if(d.untrack){S.tracker=S.tracker.filter(x=>x.id!==d.untrack);save();closeAll();render()}
+ else if(d.pin){const x=S.tracker.find(r=>r.id===d.pin);if(x){if(!x.pinned&&S.tracker.filter(r=>r.pinned).length>=5){toast('5 éléments épinglés au maximum');return}x.pinned=!x.pinned;save();render()}}
+ else if(d.delalert){S.alerts=S.alerts.filter(a=>a.id!==d.delalert);save();render()}
+ else if(d.plan){S.plan=d.plan;if(S.think>PLANS[d.plan].think)S.think=PLANS[d.plan].think;save();render();toast('Plan '+PLANS[d.plan].n+' activé')}
+ else if(d.chat){const c=S.chats.find(x=>x.id===d.chat);if(c){cur=c;closeAll();if(location.hash==='#twin')paint();else{location.hash='twin'}}}
+ else if(d.cpin){const c=S.chats.find(x=>x.id===d.cpin);if(c){c.pinned=!c.pinned;save();paint()}}
+ else if(d.cdel){S.chats=S.chats.filter(x=>x.id!==d.cdel);if(cur&&cur.id===d.cdel)newChat();save();paint()}
+ else if(d.twt){const p=TWT[+d.twt][1];if(p.endsWith(': ')){const ci=$('#ci');ci.value=p;ci.focus()}else send(p,[])}});
+render();
+fetch('data/offres.json',{cache:'no-cache'}).then(r=>r.json()).then(j=>{SEED=Array.isArray(j)?j:[];rebuildCat();render()}).catch(()=>toast('Catalogue indisponible, réessayez plus tard'));
+fetch('data/meta.json',{cache:'no-cache'}).then(r=>r.json()).then(j=>{META=j;render()}).catch(()=>{});
+
+/* ---------- Persistance (compte) ---------- */
+(async()=>{try{db=await claude.use('db');const u=await claude.use('user');myId=u&&await u.id();if(!db||!myId){db=null;return}
+ const base='data/users/'+myId;const [c,ch,dc,fd]=await Promise.all([db.doc(base+'/core').get(),db.doc(base+'/chats').get(),db.doc(base+'/docs').get(),db.doc(base+'/found').get()]);
+ if(c.exists&&(c.data().upd||0)>S.upd){S=Object.assign(blank(),JSON.parse(JSON.stringify(c.data())));S.chats=ch.exists?JSON.parse(JSON.stringify(ch.data().list||[])):[];S.docs=dc.exists?JSON.parse(JSON.stringify(dc.data().list||[])):[];S.found=fd.exists?JSON.parse(JSON.stringify(fd.data().list||[])):[];rebuildCat();try{localStorage.setItem('boussole',JSON.stringify(S))}catch(e){}cur=null;render()}
+ else if(S.upd)flush()}catch(e){db=null}})();
+}
+</script>
+</body>
+</html>
