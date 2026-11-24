@@ -227,7 +227,7 @@
    "urls": [
     "https://www.jobs.cam.ac.uk/job/?category=10"
    ],
-   "pattern": "jobs\\.cam\\.ac\\.uk/job/\\d+|^/job/\\d+"
+   "pattern": "/job/\\d+"
   },
   {
    "id": "afterschoolafrica",
@@ -245,7 +245,7 @@
    "type": "rss",
    "kind": "auto",
    "strip_source": true,
-   "enabled": true,
+   "enabled": false,
    "urls": [
     "https://news.google.com/rss/search?q=%22fully+funded+PhD%22+position+when:14d&hl=en&gl=GB&ceid=GB:en",
     "https://news.google.com/rss/search?q=%22PhD+studentship%22+funded+when:14d&hl=en&gl=GB&ceid=GB:en",
@@ -255,7 +255,8 @@
     "https://news.google.com/rss/search?q=PhD+%22sport+and+exercise+science%22+OR+%22sports+science%22+funded+when:14d&hl=en&gl=GB&ceid=GB:en",
     "https://news.google.com/rss/search?q=%22contrat+doctoral%22+OR+%22thèse+financée%22+candidature+when:14d&hl=fr&gl=FR&ceid=FR:fr",
     "https://news.google.com/rss/search?q=%22bourse+doctorale%22+OR+%22bourse+de+master%22+2027+when:14d&hl=fr&gl=FR&ceid=FR:fr"
-   ]
+   ],
+   "note": "Google interdit les robots sur ce fil (robots.txt) : laissé coupé."
   }
  ]
 }

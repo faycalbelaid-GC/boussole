@@ -306,6 +306,7 @@ def read_rss(src: dict) -> list[dict]:
     out = []
     for u in src["urls"]:
         feed = feedparser.parse(get(u))
+        n0 = len(out)
         for e in feed.entries[:80]:
             summary = BeautifulSoup(e.get("summary", "") or "", "html.parser").get_text(" ")
             title = e.get("title", "")
@@ -314,6 +315,10 @@ def read_rss(src: dict) -> list[dict]:
             it = make(src, title, e.get("link", ""), summary)
             if it:
                 out.append(it)
+        if not feed.entries:
+            print(f"   ! {u} : fil vide ou illisible ({feed.get('bozo_exception', '') or 'aucun élément'})")
+        elif len(out) == n0:
+            print(f"   ! {u} : {len(feed.entries)} élément(s), tous écartés. Exemples : {[e.get('title','')[:70] for e in feed.entries[:4]]}")
     return out
 
 
