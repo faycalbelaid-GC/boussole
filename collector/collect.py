@@ -355,6 +355,30 @@ def read_rss_index(src: dict) -> list[dict]:
     return read_rss({**src, "urls": feeds})
 
 
+def read_telegram(src: dict) -> list[dict]:
+    """Canal Telegram public (aperçu web t.me/s/...) : chaque message = une annonce."""
+    out = []
+    for u in src["urls"]:
+        soup = BeautifulSoup(get(u), "html.parser")
+        for msg in soup.select("div.tgme_widget_message")[-60:]:
+            body = msg.select_one("div.tgme_widget_message_text")
+            if not body:
+                continue
+            lines = [clean(x) for x in body.get_text("\n").split("\n") if clean(x)]
+            if not lines:
+                continue
+            title = next((ln for ln in lines if len(ln) > 20 and not ln.startswith("#")), lines[0])
+            links = [a["href"] for a in body.find_all("a", href=True) if a["href"].startswith("http") and "t.me/" not in a["href"]]
+            post = msg.get("data-post", "")
+            url = links[0] if links else (f"https://t.me/{post}" if post else "")
+            if not url:
+                continue
+            it = make(src, title, url, " ".join(lines), guess_institution(lines, title))
+            if it:
+                out.append(it)
+    return out
+
+
 def read_html(src: dict) -> list[dict]:
     out, seen = [], set()
     rx = re.compile(src["pattern"])
@@ -389,20 +413,38 @@ def read_html(src: dict) -> list[dict]:
     return out
 
 
-def read_linkedin_mail() -> list[dict]:
-    """Facultatif : lit les alertes emploi LinkedIn reçues sur une boîte Gmail dédiée.
-    Activé seulement si les secrets GMAIL_USER et GMAIL_APP_PASSWORD existent."""
+ALERT_LINKS = {  # plateforme -> forme des liens d'annonce dans ses emails d'alerte
+    "LinkedIn": r"linkedin\.com/(?:comm/)?jobs/view/\d+",
+    "FindAPhD": r"findaphd\.com/phds/(?:project|programme|program)/[^\s\"'?#]+",
+    "FindAMasters": r"findamasters\.com/masters-degrees/[^\s\"'?#]+",
+    "jobs.ac.uk": r"jobs\.ac\.uk/job/[A-Z]{3}\d+",
+    "EURAXESS": r"euraxess\.ec\.europa\.eu/jobs/\d+",
+    "Academic Positions": r"academicpositions\.com/ad/[^\s\"'?#]+",
+    "Nature Careers": r"nature\.com/naturecareers/job/[^\s\"'?#]+",
+    "ScholarshipDb": r"scholarshipdb\.net/(?:scholarships|jobs)-in-[^\s\"'?#]+",
+    "Jobbnorge": r"jobbnorge\.no/[a-z/-]*job/\d+",
+    "Varbi": r"[a-z]+\.varbi\.com/[a-z/-]*job/\d+",
+    "ABG": r"abg\.asso\.fr/[a-z]{2}/candidatOffres/show/id_offre/\d+",
+    "Academic Transfer": r"academictransfer\.com/(?:en/)?jobs/\d+",
+}
+
+
+def read_alert_mail() -> list[dict]:
+    """Facultatif : lit les alertes emploi reçues sur une boîte Gmail dédiée (LinkedIn, FindAPhD,
+    jobs.ac.uk, EURAXESS, Academic Positions, Nature Careers…). On s'abonne gratuitement aux alertes
+    sur chaque site ; ce sont les sites eux-mêmes qui envoient leurs offres. Activé seulement si les
+    secrets GMAIL_USER et GMAIL_APP_PASSWORD existent."""
     user, pwd = os.environ.get("GMAIL_USER"), os.environ.get("GMAIL_APP_PASSWORD")
     if not user or not pwd:
         return []
-    src = {"name": "LinkedIn (alertes)", "kind": "position"}
-    out = []
+    from urllib.parse import unquote
+    out, seen = [], set()
     box = imaplib.IMAP4_SSL("imap.gmail.com")
     box.login(user, pwd)
     box.select("INBOX")
     since = (TODAY - dt.timedelta(days=3)).strftime("%d-%b-%Y")
-    _, ids = box.search(None, f'(FROM "linkedin.com" SINCE {since})')
-    for i in ids[0].split()[-30:]:
+    _, ids = box.search(None, f"(SINCE {since})")
+    for i in ids[0].split()[-200:]:
         _, data = box.fetch(i, "(RFC822)")
         msg = email.message_from_bytes(data[0][1])
         for part in msg.walk():
@@ -410,12 +452,23 @@ def read_linkedin_mail() -> list[dict]:
                 continue
             soup = BeautifulSoup(part.get_payload(decode=True).decode(errors="ignore"), "html.parser")
             for a in soup.find_all("a", href=True):
-                m = re.search(r"linkedin\.com/(?:comm/)?jobs/view/(\d+)", a["href"])
-                if m and len(clean(a.get_text())) > 10:
-                    ctx = clean(a.find_parent("table").get_text(" ")) if a.find_parent("table") else ""
-                    it = make(src, a.get_text(), f"https://www.linkedin.com/jobs/view/{m[1]}/", ctx)
+                href = unquote(unquote(a["href"]))  # les liens de suivi contiennent souvent l'adresse réelle
+                for name, rx in ALERT_LINKS.items():
+                    m = re.search(rx, href)
+                    if not m:
+                        continue
+                    url = m[0] if m[0].startswith("http") else "https://" + m[0]
+                    title = clean(a.get_text(" "))
+                    if url in seen or len(title) < 12:
+                        break
+                    seen.add(url)
+                    box_el = a.find_parent("table") or a.parent
+                    ctx = clean(box_el.get_text(" "))[:600] if box_el else ""
+                    it = make({"name": name + " (alertes)", "kind": "auto"}, title, url, ctx)
                     if it:
+                        it["k"] = kind_of(title + " " + ctx, "auto")
                         out.append(it)
+                    break
     box.logout()
     return out
 
@@ -433,7 +486,7 @@ def main() -> int:
             continue
         print(f"→ {src['name']}")
         try:
-            reader = {"rss": read_rss, "rss_index": read_rss_index, "html": read_html}[src["type"]]
+            reader = {"rss": read_rss, "rss_index": read_rss_index, "html": read_html, "telegram": read_telegram}[src["type"]]
             items = reader(src)
             report[src["name"]] = {"ok": True, "offres": len(items)}
             print(f"   {len(items)} offre(s) retenue(s)")
@@ -442,12 +495,14 @@ def main() -> int:
             report[src["name"]] = {"ok": False, "erreur": str(e)[:200]}
             print(f"   ✗ {e}")
     try:
-        li = read_linkedin_mail()
+        li = read_alert_mail()
         if li or os.environ.get("GMAIL_USER"):
-            report["LinkedIn (alertes)"] = {"ok": True, "offres": len(li)}
+            report["Alertes email"] = {"ok": True, "offres": len(li)}
+            print(f"→ Alertes email\n   {len(li)} offre(s) retenue(s)")
         fresh += li
     except Exception as e:
-        report["LinkedIn (alertes)"] = {"ok": False, "erreur": str(e)[:200]}
+        report["Alertes email"] = {"ok": False, "erreur": str(e)[:200]}
+        print(f"→ Alertes email\n   ✗ {e}")
 
     added = 0
     for it in fresh:

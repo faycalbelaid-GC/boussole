@@ -260,6 +260,559 @@
     "https://news.google.com/rss/search?q=%22bourse+doctorale%22+OR+%22bourse+de+master%22+2027+when:14d&hl=fr&gl=FR&ceid=FR:fr"
    ],
    "note": "Google interdit les robots sur ce fil (robots.txt) : laissé coupé."
+  },
+  {
+   "id": "uk-surrey",
+   "name": "University of Surrey",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Surrey",
+   "enabled": true,
+   "urls": [
+    "https://jobs.surrey.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-derby",
+   "name": "University of Derby",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Derby",
+   "enabled": true,
+   "urls": [
+    "https://jobs.derby.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-chester",
+   "name": "University of Chester",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Chester",
+   "enabled": true,
+   "urls": [
+    "https://jobs.chester.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-keele",
+   "name": "Keele University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Keele University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.keele.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-northumbria",
+   "name": "Northumbria University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Northumbria University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.northumbria.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-shu",
+   "name": "Sheffield Hallam University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Sheffield Hallam University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.shu.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-dmu",
+   "name": "De Montfort University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "De Montfort University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.dmu.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-leedsbeckett",
+   "name": "Leeds Beckett University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Leeds Beckett University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.leedsbeckett.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-coventry",
+   "name": "Coventry University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Coventry University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.coventry.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-kent",
+   "name": "University of Kent",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Kent",
+   "enabled": true,
+   "urls": [
+    "https://jobs.kent.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-essex",
+   "name": "University of Essex",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Essex",
+   "enabled": true,
+   "urls": [
+    "https://jobs.essex.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-reading",
+   "name": "University of Reading",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Reading",
+   "enabled": true,
+   "urls": [
+    "https://jobs.reading.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-aston",
+   "name": "Aston University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Aston University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.aston.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-brunel",
+   "name": "Brunel University London",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Brunel University London",
+   "enabled": true,
+   "urls": [
+    "https://jobs.brunel.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-uclan",
+   "name": "University of Central Lancashire",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Central Lancashire",
+   "enabled": true,
+   "urls": [
+    "https://jobs.uclan.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-cardiffmet",
+   "name": "Cardiff Metropolitan University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Cardiff Metropolitan University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.cardiffmet.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-salford",
+   "name": "University of Salford",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Salford",
+   "enabled": true,
+   "urls": [
+    "https://jobs.salford.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-hud",
+   "name": "University of Huddersfield",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Huddersfield",
+   "enabled": true,
+   "urls": [
+    "https://jobs.hud.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-edgehill",
+   "name": "Edge Hill University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Edge Hill University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.edgehill.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-bangor",
+   "name": "Bangor University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Bangor University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.bangor.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-swansea",
+   "name": "Swansea University",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "Swansea University",
+   "enabled": true,
+   "urls": [
+    "https://jobs.swansea.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-glos",
+   "name": "University of Gloucestershire",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Gloucestershire",
+   "enabled": true,
+   "urls": [
+    "https://jobs.glos.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-port",
+   "name": "University of Portsmouth",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Portsmouth",
+   "enabled": true,
+   "urls": [
+    "https://jobs.port.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-brighton",
+   "name": "University of Brighton",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Brighton",
+   "enabled": true,
+   "urls": [
+    "https://jobs.brighton.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-herts",
+   "name": "University of Hertfordshire",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Hertfordshire",
+   "enabled": true,
+   "urls": [
+    "https://jobs.herts.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-northampton",
+   "name": "University of Northampton",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Northampton",
+   "enabled": true,
+   "urls": [
+    "https://jobs.northampton.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-roehampton",
+   "name": "University of Roehampton",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Roehampton",
+   "enabled": true,
+   "urls": [
+    "https://jobs.roehampton.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-wlv",
+   "name": "University of Wolverhampton",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Wolverhampton",
+   "enabled": true,
+   "urls": [
+    "https://jobs.wlv.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-stir",
+   "name": "University of Stirling",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Stirling",
+   "enabled": true,
+   "urls": [
+    "https://jobs.stir.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "uk-abdn",
+   "name": "University of Aberdeen",
+   "type": "rss_index",
+   "kind": "position",
+   "country": "Royaume-Uni",
+   "institution": "University of Aberdeen",
+   "enabled": true,
+   "urls": [
+    "https://jobs.abdn.ac.uk/RSS/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "phdfinder",
+   "name": "PhDFinder",
+   "type": "rss",
+   "kind": "position",
+   "enabled": true,
+   "urls": [
+    "https://phdfinder.com/feed/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "opportunitiescorners",
+   "name": "Opportunities Corners",
+   "type": "rss",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://opportunitiescorners.com/feed/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "youthop",
+   "name": "Youth Opportunities",
+   "type": "rss",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://www.youthop.com/feed/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "scholarshiproar",
+   "name": "Scholarship Roar",
+   "type": "rss",
+   "kind": "scholarship",
+   "enabled": true,
+   "urls": [
+    "https://scholarshiproar.com/feed/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "worldscholarshipforum",
+   "name": "World Scholarship Forum",
+   "type": "rss",
+   "kind": "scholarship",
+   "enabled": true,
+   "urls": [
+    "https://worldscholarshipforum.com/feed/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "scholarshipsads",
+   "name": "ScholarshipsAds",
+   "type": "rss",
+   "kind": "scholarship",
+   "enabled": true,
+   "urls": [
+    "https://www.scholarshipsads.com/feed/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "scholarshippositions",
+   "name": "Scholarship Positions",
+   "type": "rss",
+   "kind": "scholarship",
+   "enabled": true,
+   "urls": [
+    "https://scholarship-positions.com/feed/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "opportunitiesforyouth",
+   "name": "Opportunities for Youth",
+   "type": "rss",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://opportunitiesforyouth.org/feed/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "trouvetabourse",
+   "name": "TrouveTaBourse",
+   "type": "rss",
+   "kind": "scholarship",
+   "enabled": true,
+   "urls": [
+    "https://trouvetabourse.com/feed/"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "daadsch",
+   "name": "DAAD (bourses)",
+   "type": "rss",
+   "kind": "scholarship",
+   "enabled": true,
+   "urls": [
+    "https://api.daad.de/api/feeds/rss/en/scholarships.xml"
+   ],
+   "note": "candidate",
+   "country": "Allemagne"
+  },
+  {
+   "id": "daadde",
+   "name": "DAAD (DE)",
+   "type": "rss",
+   "kind": "position",
+   "enabled": true,
+   "urls": [
+    "https://api.daad.de/api/feeds/rss/de/phd.xml"
+   ],
+   "note": "candidate",
+   "country": "Allemagne"
+  },
+  {
+   "id": "positionclub",
+   "name": "PositionClub (Telegram)",
+   "type": "telegram",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://t.me/s/PositionClub"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "abg",
+   "name": "ABG (thèses France)",
+   "type": "html",
+   "kind": "position",
+   "country": "France",
+   "enabled": true,
+   "urls": [
+    "https://abg.asso.fr/fr/recrutement/sujet-de-these",
+    "https://abg.asso.fr/fr/recrutement/sujet-de-these/mathematiques",
+    "https://abg.asso.fr/en/recruitment/thesis-topic/computer-science"
+   ],
+   "pattern": "candidatOffres/show|id_offre|/sujet-de-these/[^/]+/[^/]+|/thesis-topic/[^/]+/[^/]+",
+   "note": "candidate"
+  },
+  {
+   "id": "umea",
+   "name": "Umeå University",
+   "type": "html",
+   "kind": "position",
+   "country": "Suède",
+   "institution": "Umeå University",
+   "enabled": true,
+   "urls": [
+    "https://www.umu.se/en/work-with-us/open-positions/"
+   ],
+   "pattern": "/open-positions/[a-z0-9-]+_\\d+",
+   "note": "candidate"
   }
  ]
 }
