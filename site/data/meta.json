@@ -1,23 +1,11 @@
 {
- "mis_a_jour": "2026-11-24T16:01+00:00",
- "total": 111,
- "nouvelles": 25,
+ "mis_a_jour": "2026-11-24T16:04+00:00",
+ "total": 139,
+ "nouvelles": 28,
  "sources": {
   "jobs.ac.uk": {
    "ok": false,
-   "erreur": "500 Server Error: Internal Server Error for url: https://www.jobs.ac.uk/search/phds"
-  },
-  "FindAPhD": {
-   "ok": false,
-   "erreur": "403 Client Error: Forbidden for url: https://www.findaphd.com/phds/latest/"
-  },
-  "Academic Positions": {
-   "ok": false,
-   "erreur": "403 Client Error: Forbidden for url: https://academicpositions.com/jobs/position/phd"
-  },
-  "EURAXESS": {
-   "ok": false,
-   "erreur": "403 Client Error: Forbidden for url: https://euraxess.ec.europa.eu/jobs/search?f%5B0%5D=offer_type%3Ajob_offer&f%5B1%5D=job_research_profile%3A446"
+   "erreur": "500 Server Error: Internal Server Error for url: https://www.jobs.ac.uk/search/?jobTypeFacet%5B%5D=phds"
   },
   "University of Nottingham": {
    "ok": true,
@@ -39,13 +27,45 @@
    "ok": true,
    "offres": 3
   },
-  "jobRxiv": {
-   "ok": false,
-   "erreur": "403 Client Error: Forbidden for url: https://jobrxiv.org/feed/"
+  "DAAD": {
+   "ok": true,
+   "offres": 28
   },
-  "ScholarshipDb": {
+  "Université de Copenhague": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Southampton": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Staffordshire": {
+   "ok": true,
+   "offres": 0
+  },
+  "Birmingham City University": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Worcester": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Lincoln": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Cambridge": {
+   "ok": true,
+   "offres": 0
+  },
+  "After School Africa": {
+   "ok": true,
+   "offres": 0
+  },
+  "Google Actualités": {
    "ok": false,
-   "erreur": "403 Client Error: Forbidden for url: https://scholarshipdb.net/scholarships/Program-PhD"
+   "erreur": "interdit par robots.txt"
   }
  }
 }
