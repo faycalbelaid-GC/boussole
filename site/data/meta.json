@@ -1,7 +1,7 @@
 {
- "mis_a_jour": "2026-11-24T16:04+00:00",
+ "mis_a_jour": "2026-11-24T16:06+00:00",
  "total": 139,
- "nouvelles": 28,
+ "nouvelles": 0,
  "sources": {
   "jobs.ac.uk": {
    "ok": false,
@@ -25,7 +25,7 @@
   },
   "Opportunities for Africans": {
    "ok": true,
-   "offres": 3
+   "offres": 2
   },
   "DAAD": {
    "ok": true,
@@ -62,10 +62,6 @@
   "After School Africa": {
    "ok": true,
    "offres": 0
-  },
-  "Google Actualités": {
-   "ok": false,
-   "erreur": "interdit par robots.txt"
   }
  }
 }
