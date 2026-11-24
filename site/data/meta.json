@@ -1,11 +1,11 @@
 {
- "mis_a_jour": "2026-11-24T20:22+00:00",
- "total": 148,
- "nouvelles": 0,
+ "mis_a_jour": "2026-11-24T20:24+00:00",
+ "total": 152,
+ "nouvelles": 4,
  "sources": {
   "PositionClub (Telegram)": {
    "ok": true,
-   "offres": 0
+   "offres": 4
   }
  }
 }
