@@ -464,7 +464,7 @@ def main() -> int:
     names = {x["name"] for x in cfg["sources"]} | {"LinkedIn (alertes)"}
     for o in by_url.values():  # reclasse les offres collectées avec les règles du jour
         if o.get("src") in names:
-            o["f"] = field_of("", o["t"]) if field_of("", o["t"]) != "Pluridisciplinaire" else o.get("f", "Pluridisciplinaire")
+            o["f"] = field_of("", o["t"])
             o["lvl"] = level_of(o["t"]) or o.get("lvl", "")
     by_url = {u: o for u, o in by_url.items() if not (o.get("src") in names and (DROP.search(o["t"]) or re.search(r"\bintern(ship)?s?\b", o["t"], re.I)))}
     keep = []
