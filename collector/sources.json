@@ -7,12 +7,13 @@
    "type": "html",
    "kind": "position",
    "country": "Royaume-Uni",
-   "enabled": true,
+   "enabled": false,
    "urls": [
     "https://www.jobs.ac.uk/search/?jobTypeFacet%5B%5D=phds",
     "https://www.jobs.ac.uk/search/?jobTypeFacet%5B%5D=masters"
    ],
-   "pattern": "/job/[A-Z]{3}\\d+"
+   "pattern": "/job/[A-Z]{3}\\d+",
+   "note": "Refuse les robots (erreur 500 systématique) : coupé."
   },
   {
    "id": "findaphd",
@@ -223,21 +224,23 @@
    "kind": "position",
    "country": "Royaume-Uni",
    "institution": "University of Cambridge",
-   "enabled": true,
+   "enabled": false,
    "urls": [
     "https://www.jobs.cam.ac.uk/job/?category=10"
    ],
-   "pattern": "/job/\\d+"
+   "pattern": "/job/\\d+",
+   "note": "Page chargée en JavaScript : illisible sans navigateur, coupée."
   },
   {
    "id": "afterschoolafrica",
    "name": "After School Africa",
    "type": "rss",
    "kind": "scholarship",
-   "enabled": true,
+   "enabled": false,
    "urls": [
     "https://www.afterschoolafrica.com/feed/"
-   ]
+   ],
+   "note": "Fil RSS cassé côté site (« Hello world! ») : coupé."
   },
   {
    "id": "googlenews",

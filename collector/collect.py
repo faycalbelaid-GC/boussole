@@ -305,7 +305,13 @@ def get(url: str) -> str:
 def read_rss(src: dict) -> list[dict]:
     out = []
     for u in src["urls"]:
-        feed = feedparser.parse(get(u))
+        raw = get(u)
+        feed = feedparser.parse(raw)
+        if not feed.entries and "<item" in raw:  # fil mal formé : lecture tolérante
+            soup = BeautifulSoup(raw, "html.parser")
+            feed.entries = [{"title": clean(i.title.get_text()) if i.title else "",
+                             "link": clean((i.find("link").get_text() or (i.find("link").next_sibling or "")) if i.find("link") else ""),
+                             "summary": i.description.get_text() if i.description else ""} for i in soup.find_all("item")]
         n0 = len(out)
         for e in feed.entries[:80]:
             summary = BeautifulSoup(e.get("summary", "") or "", "html.parser").get_text(" ")
