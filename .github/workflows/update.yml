@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "17 3 * * *"        # chaque nuit à 03:17 UTC (04:17 à Paris en hiver)
   workflow_dispatch:             # bouton « Run workflow » pour lancer à la main
+    inputs:
+      only:
+        description: "Tester seulement ces sources (identifiants séparés par des virgules, vide = toutes)"
+        required: false
+        default: ""
   push:
     branches: [main]
     paths: ["site/**", "collector/**", ".github/workflows/**"]
@@ -34,6 +39,7 @@ jobs:
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ONLY: ${{ github.event.inputs.only }}
         run: python collector/collect.py
       - name: Enregistrer les nouvelles offres
         run: |

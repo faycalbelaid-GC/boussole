@@ -376,6 +376,9 @@ def read_telegram(src: dict) -> list[dict]:
             it = make(src, title, url, " ".join(lines), guess_institution(lines, title))
             if it:
                 out.append(it)
+        if not out:
+            msgs = soup.select("div.tgme_widget_message_text")
+            print(f"   ! {u} : {len(msgs)} message(s) lus. Exemples : {[clean(m.get_text(' '))[:90] for m in msgs[-3:]]}")
     return out
 
 
@@ -481,8 +484,11 @@ def main() -> int:
     cfg = json.loads(SOURCES.read_text("utf-8"))
     report, fresh = {}, []
 
+    only = {x.strip() for x in os.environ.get("ONLY", "").split(",") if x.strip()}
     for src in cfg["sources"]:
-        if not src.get("enabled", True):
+        if only and src["id"] not in only:
+            continue
+        if not only and not src.get("enabled", True):
             continue
         print(f"→ {src['name']}")
         try:
