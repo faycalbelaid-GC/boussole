@@ -367,7 +367,10 @@ def read_telegram(src: dict) -> list[dict]:
             lines = [clean(x) for x in body.get_text("\n").split("\n") if clean(x)]
             if not lines:
                 continue
-            title = next((ln for ln in lines if len(ln) > 20 and not ln.startswith("#")), lines[0])
+            head = clean(lines[0].replace("#", ""))
+            topic = next((ln.split(":", 1)[1].strip() for ln in lines if re.match(r"(area/)?topic\s*:", ln, re.I)), "")
+            title = f"{head} — {topic}" if topic else next((ln for ln in lines if len(ln) > 20 and not ln.startswith("#")), head)
+            lines = [ln.lstrip("> ").strip() for ln in lines]
             links = [a["href"] for a in body.find_all("a", href=True) if a["href"].startswith("http") and "t.me/" not in a["href"]]
             post = msg.get("data-post", "")
             url = links[0] if links else (f"https://t.me/{post}" if post else "")
