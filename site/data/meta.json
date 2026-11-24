@@ -1,7 +1,7 @@
 {
- "mis_a_jour": "2026-11-24T16:17+00:00",
- "total": 136,
- "nouvelles": 0,
+ "mis_a_jour": "2026-11-24T20:19+00:00",
+ "total": 148,
+ "nouvelles": 12,
  "sources": {
   "University of Nottingham": {
    "ok": true,
@@ -21,7 +21,7 @@
   },
   "Opportunities for Africans": {
    "ok": true,
-   "offres": 2
+   "offres": 3
   },
   "DAAD": {
    "ok": false,
@@ -50,6 +50,182 @@
   "University of Lincoln": {
    "ok": true,
    "offres": 0
+  },
+  "University of Surrey": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Derby": {
+   "ok": false,
+   "erreur": "aucun fil doctorat trouvé sur la page RSS"
+  },
+  "University of Chester": {
+   "ok": false,
+   "erreur": "aucun fil doctorat trouvé sur la page RSS"
+  },
+  "Keele University": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.keele.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.keele.ac.uk', port=443): Failed to resolve 'jobs"
+  },
+  "Northumbria University": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.northumbria.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.northumbria.ac.uk', port=443): Failed to r"
+  },
+  "Sheffield Hallam University": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.shu.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.shu.ac.uk', port=443): Failed to resolve 'jobs.shu"
+  },
+  "De Montfort University": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.dmu.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by SSLError(SSLError(1, '[SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disa"
+  },
+  "Leeds Beckett University": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.leedsbeckett.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.leedsbeckett.ac.uk', port=443): Failed to"
+  },
+  "Coventry University": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.coventry.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.coventry.ac.uk', port=443): Failed to resolve"
+  },
+  "University of Kent": {
+   "ok": false,
+   "erreur": "aucun fil doctorat trouvé sur la page RSS"
+  },
+  "University of Essex": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.essex.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='jobs.essex.ac.uk', port=443) at 0x715cc8b543e0>, 'Con"
+  },
+  "University of Reading": {
+   "ok": false,
+   "erreur": "404 Client Error: Not Found for url: https://jobs.reading.ac.uk/RSS/"
+  },
+  "Aston University": {
+   "ok": false,
+   "erreur": "aucun fil doctorat trouvé sur la page RSS"
+  },
+  "Brunel University London": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.brunel.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='jobs.brunel.ac.uk', port=443) at 0x715cc8b1d100>, 'C"
+  },
+  "University of Central Lancashire": {
+   "ok": false,
+   "erreur": "aucun fil doctorat trouvé sur la page RSS"
+  },
+  "Cardiff Metropolitan University": {
+   "ok": false,
+   "erreur": "aucun fil doctorat trouvé sur la page RSS"
+  },
+  "University of Salford": {
+   "ok": false,
+   "erreur": "aucun fil doctorat trouvé sur la page RSS"
+  },
+  "University of Huddersfield": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.hud.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.hud.ac.uk', port=443): Failed to resolve 'jobs.hud"
+  },
+  "Edge Hill University": {
+   "ok": false,
+   "erreur": "aucun fil doctorat trouvé sur la page RSS"
+  },
+  "Bangor University": {
+   "ok": false,
+   "erreur": "404 Client Error: Not Found for url: https://jobs.bangor.ac.uk/RSS/"
+  },
+  "Swansea University": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.swansea.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.swansea.ac.uk', port=443): Failed to resolve '"
+  },
+  "University of Gloucestershire": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.glos.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed:"
+  },
+  "University of Portsmouth": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.port.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.port.ac.uk', port=443): Failed to resolve 'jobs.p"
+  },
+  "University of Brighton": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Hertfordshire": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.herts.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.herts.ac.uk', port=443): Failed to resolve 'jobs"
+  },
+  "University of Northampton": {
+   "ok": false,
+   "erreur": "404 Client Error: Not Found for url: https://jobs.northampton.ac.uk/RSS/"
+  },
+  "University of Roehampton": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.roehampton.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.roehampton.ac.uk', port=443): Failed to res"
+  },
+  "University of Wolverhampton": {
+   "ok": false,
+   "erreur": "404 Client Error: Not Found for url: https://jobs.wlv.ac.uk/RSS/"
+  },
+  "University of Stirling": {
+   "ok": false,
+   "erreur": "aucun fil doctorat trouvé sur la page RSS"
+  },
+  "University of Aberdeen": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='jobs.abdn.ac.uk', port=443): Max retries exceeded with url: /RSS/ (Caused by NameResolutionError(\"HTTPSConnection(host='jobs.abdn.ac.uk', port=443): Failed to resolve 'jobs.a"
+  },
+  "PhDFinder": {
+   "ok": true,
+   "offres": 8
+  },
+  "Opportunities Corners": {
+   "ok": true,
+   "offres": 1
+  },
+  "Youth Opportunities": {
+   "ok": false,
+   "erreur": "404 Client Error: Not Found for url: https://www.youthop.com/feed/"
+  },
+  "Scholarship Roar": {
+   "ok": false,
+   "erreur": "403 Client Error: Forbidden for url: https://scholarshiproar.com/feed/"
+  },
+  "World Scholarship Forum": {
+   "ok": false,
+   "erreur": "403 Client Error: Forbidden for url: https://worldscholarshipforum.com/feed/"
+  },
+  "ScholarshipsAds": {
+   "ok": false,
+   "erreur": "404 Client Error: Not Found for url: https://www.scholarshipsads.com/feed/"
+  },
+  "Scholarship Positions": {
+   "ok": false,
+   "erreur": "HTTPSConnectionPool(host='cloudflare.vc', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLError(1, '[SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1011)')))"
+  },
+  "Opportunities for Youth": {
+   "ok": true,
+   "offres": 2
+  },
+  "TrouveTaBourse": {
+   "ok": false,
+   "erreur": "404 Client Error: Not Found for url: https://trouvetabourse.com/feed"
+  },
+  "DAAD (bourses)": {
+   "ok": false,
+   "erreur": "403 Client Error: Forbidden for url: https://api.daad.de/api/feeds/rss/en/scholarships.xml"
+  },
+  "DAAD (DE)": {
+   "ok": false,
+   "erreur": "403 Client Error: Forbidden for url: https://api.daad.de/api/feeds/rss/de/phd.xml"
+  },
+  "PositionClub (Telegram)": {
+   "ok": true,
+   "offres": 0
+  },
+  "ABG (thèses France)": {
+   "ok": false,
+   "erreur": "404 Client Error: Not Found for url: https://abg.asso.fr/fr/recrutement/sujet-de-these"
+  },
+  "Umeå University": {
+   "ok": false,
+   "erreur": "403 Client Error: Forbidden for url: https://www.umu.se/en/work-with-us/open-positions/"
   }
  }
 }
