@@ -278,6 +278,7 @@ def make(src: dict, title: str, url: str, context: str, institution: str = "", d
         "dl": dl,
         "url": url,
         "src": src["name"],
+        "auto": 1,
     }
 
 
@@ -461,12 +462,11 @@ def main() -> int:
             by_url[it["url"]] = it
             added += 1
 
-    names = {x["name"] for x in cfg["sources"]} | {"LinkedIn (alertes)"}
     for o in by_url.values():  # reclasse les offres collectées avec les règles du jour
-        if o.get("src") in names:
+        if o.get("auto"):
             o["f"] = field_of("", o["t"])
             o["lvl"] = level_of(o["t"]) or o.get("lvl", "")
-    by_url = {u: o for u, o in by_url.items() if not (o.get("src") in names and (DROP.search(o["t"]) or re.search(r"\bintern(ship)?s?\b", o["t"], re.I)))}
+    by_url = {u: o for u, o in by_url.items() if not (o.get("auto") and (DROP.search(o["t"]) or re.search(r"\bintern(ship)?s?\b", o["t"], re.I)))}
     keep = []
     for o in by_url.values():
         if o.get("dl") and o["dl"] < TODAY.isoformat():
