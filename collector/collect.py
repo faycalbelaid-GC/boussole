@@ -255,8 +255,14 @@ def clean(s: str) -> str:
     return re.sub(r"\s+", " ", s or "").strip()
 
 
+def tidy(s: str) -> str:
+    """Retire émojis, puces et libellés (« University: ») en début de texte."""
+    s = re.sub(r"^[^\w«\"(]+", "", clean(s).replace("#", ""))
+    return re.sub(r"^(university|université|institution|uni|employer)\s*:\s*", "", s, flags=re.I).strip()
+
+
 def make(src: dict, title: str, url: str, context: str, institution: str = "", date_hint: str = "") -> dict | None:
-    title = clean(title)[:220]
+    title, institution = tidy(title)[:220], tidy(institution)
     if len(title) < 8:
         return None
     whole = f"{title} {context}"

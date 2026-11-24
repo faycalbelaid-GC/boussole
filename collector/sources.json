@@ -783,7 +783,7 @@
    "urls": [
     "https://t.me/s/PositionClub"
    ],
-   "note": "candidate"
+   "note": "Testé le 24/11/2026 : fonctionne"
   },
   {
    "id": "abg",
@@ -813,6 +813,50 @@
    ],
    "pattern": "/open-positions/[a-z0-9-]+_\\d+",
    "note": "Testé le 24/11/2026 : 403 Client Error: Forbidden for url: https://www.umu.se/en/work-with-us/open-pos"
+  },
+  {
+   "id": "tg-directapply",
+   "name": "directapply (Telegram)",
+   "type": "telegram",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://t.me/s/directapply"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "tg-azarapply",
+   "name": "AzarApply (Telegram)",
+   "type": "telegram",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://t.me/s/AzarApply"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "tg-azarapplygermany",
+   "name": "AzarApplyGermany (Telegram)",
+   "type": "telegram",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://t.me/s/AzarApplyGermany"
+   ],
+   "note": "candidate"
+  },
+  {
+   "id": "tg-phdfinderuk",
+   "name": "PhDFinderUK (Telegram)",
+   "type": "telegram",
+   "kind": "auto",
+   "enabled": true,
+   "urls": [
+    "https://t.me/s/PhDFinderUK"
+   ],
+   "note": "candidate"
   }
  ]
 }
