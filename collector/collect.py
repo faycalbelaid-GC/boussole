@@ -364,7 +364,9 @@ def read_telegram(src: dict) -> list[dict]:
             body = msg.select_one("div.tgme_widget_message_text")
             if not body:
                 continue
-            lines = [clean(x) for x in body.get_text("\n").split("\n") if clean(x)]
+            for br in body.find_all("br"):
+                br.replace_with("\n")
+            lines = [clean(x) for x in body.get_text("").split("\n") if clean(x)]
             if not lines:
                 continue
             head = clean(lines[0].replace("#", ""))
