@@ -1,11 +1,87 @@
 {
- "mis_a_jour": "2026-11-24T20:28+00:00",
- "total": 174,
- "nouvelles": 0,
+ "mis_a_jour": "2026-11-25T13:09+00:00",
+ "total": 185,
+ "nouvelles": 12,
  "sources": {
+  "University of Nottingham": {
+   "ok": true,
+   "offres": 13
+  },
+  "Harper Adams University": {
+   "ok": true,
+   "offres": 4
+  },
+  "Scholars4Dev": {
+   "ok": true,
+   "offres": 5
+  },
+  "Opportunity Desk": {
+   "ok": true,
+   "offres": 3
+  },
+  "Opportunities for Africans": {
+   "ok": true,
+   "offres": 3
+  },
+  "DAAD": {
+   "ok": false,
+   "erreur": "403 Client Error: Forbidden for url: https://api.daad.de/api/feeds/rss/en/phd.xml"
+  },
+  "Université de Copenhague": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Southampton": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Staffordshire": {
+   "ok": true,
+   "offres": 0
+  },
+  "Birmingham City University": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Worcester": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Lincoln": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Surrey": {
+   "ok": true,
+   "offres": 0
+  },
+  "University of Brighton": {
+   "ok": true,
+   "offres": 0
+  },
+  "PhDFinder": {
+   "ok": true,
+   "offres": 9
+  },
+  "Opportunities Corners": {
+   "ok": true,
+   "offres": 1
+  },
+  "Opportunities for Youth": {
+   "ok": false,
+   "erreur": "403 Client Error: Forbidden for url: https://opportunitiesforyouth.org/feed/"
+  },
   "PositionClub (Telegram)": {
    "ok": true,
    "offres": 4
+  },
+  "AzarApply (Telegram)": {
+   "ok": true,
+   "offres": 0
+  },
+  "PhDFinderUK (Telegram)": {
+   "ok": true,
+   "offres": 13
   }
  }
 }
