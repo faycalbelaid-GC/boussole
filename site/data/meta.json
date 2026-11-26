@@ -1,7 +1,7 @@
 {
- "mis_a_jour": "2026-11-25T13:09+00:00",
- "total": 185,
- "nouvelles": 12,
+ "mis_a_jour": "2026-11-26T12:49+00:00",
+ "total": 203,
+ "nouvelles": 18,
  "sources": {
   "University of Nottingham": {
    "ok": true,
@@ -17,7 +17,7 @@
   },
   "Opportunity Desk": {
    "ok": true,
-   "offres": 3
+   "offres": 2
   },
   "Opportunities for Africans": {
    "ok": true,
@@ -81,7 +81,7 @@
   },
   "PhDFinderUK (Telegram)": {
    "ok": true,
-   "offres": 13
+   "offres": 14
   }
  }
 }
