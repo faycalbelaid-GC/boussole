@@ -1,11 +1,11 @@
 {
- "mis_a_jour": "2026-11-27T12:43+00:00",
- "total": 215,
- "nouvelles": 13,
+ "mis_a_jour": "2026-11-28T11:59+00:00",
+ "total": 236,
+ "nouvelles": 21,
  "sources": {
   "University of Nottingham": {
    "ok": true,
-   "offres": 13
+   "offres": 14
   },
   "Harper Adams University": {
    "ok": true,
@@ -25,7 +25,7 @@
   },
   "DAAD": {
    "ok": false,
-   "erreur": "HTTPSConnectionPool(host='api.daad.de', port=443): Max retries exceeded with url: /api/feeds/rss/en/phd.xml (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.daad.de', port=443) at 0x709cd2042"
+   "erreur": "403 Client Error: Forbidden for url: https://api.daad.de/api/feeds/rss/en/phd.xml"
   },
   "Université de Copenhague": {
    "ok": true,
@@ -61,15 +61,15 @@
   },
   "PhDFinder": {
    "ok": true,
-   "offres": 9
+   "offres": 8
   },
   "Opportunities Corners": {
    "ok": true,
    "offres": 1
   },
   "Opportunities for Youth": {
-   "ok": false,
-   "erreur": "403 Client Error: Forbidden for url: https://opportunitiesforyouth.org/feed/"
+   "ok": true,
+   "offres": 3
   },
   "PositionClub (Telegram)": {
    "ok": true,
@@ -77,11 +77,11 @@
   },
   "AzarApply (Telegram)": {
    "ok": true,
-   "offres": 0
+   "offres": 1
   },
   "PhDFinderUK (Telegram)": {
    "ok": true,
-   "offres": 15
+   "offres": 13
   }
  }
 }
